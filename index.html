@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Personal Portfolio</title>
+    <title>Satria | Creative Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- 1. VARIABLES & RESET --- */
         :root {
-            --bg-color: #080808; /* Hitam lebih pekat untuk hemat baterai HP AMOLED */
+            --bg-color: #0a0a0a;
             --second-bg: #121212;
-            --text-color: #f0f0f0;
+            --text-color: #e0e0e0;
             --main-color: #00f2ea; /* Cyan Neon */
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --border-glass: rgba(255, 255, 255, 0.08);
             --font-main: 'Outfit', sans-serif;
         }
 
@@ -30,7 +30,7 @@
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* --- SCROLL PROGRESS BAR (Indikator Scroll) --- */
+        /* Scroll Indicator */
         .progress-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 3px; z-index: 2000; background: transparent;
         }
@@ -42,169 +42,181 @@
         /* --- 2. HEADER --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            padding: 15px 5%; /* Padding lebih kecil biar luas di HP */
-            background: rgba(8, 8, 8, 0.95); /* Hampir solid biar performa lancar */
+            padding: 15px 8%;
+            background: rgba(10, 10, 10, 0.95);
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; border-bottom: 1px solid var(--border-glass);
         }
 
-        .logo { font-size: 24px; font-weight: 700; letter-spacing: 1px; }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
         .logo span { color: var(--main-color); }
 
         .navbar { display: flex; }
         .navbar a {
-            font-size: 16px; color: #ccc; margin-left: 30px; font-weight: 500; position: relative;
+            font-size: 15px; color: #aaa; margin-left: 30px; font-weight: 500; position: relative;
         }
         .navbar a:hover, .navbar a.active { color: var(--main-color); }
 
-        #menu-icon { font-size: 26px; color: var(--text-color); display: none; cursor: pointer; }
+        #menu-icon { font-size: 24px; color: var(--text-color); display: none; cursor: pointer; }
 
         /* --- 3. HERO SECTION --- */
         .home {
             min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             text-align: center;
-            padding: 100px 20px 60px;
-            /* Background Radial simpel */
-            background: radial-gradient(circle at center, #1a1a1a 0%, #080808 70%);
+            padding: 130px 5% 80px;
+            background: radial-gradient(circle at center, #181818 0%, #0a0a0a 70%);
         }
 
-        .home-content { max-width: 800px; width: 100%; }
+        .home-content { max-width: 700px; width: 100%; display: flex; flex-direction: column; align-items: center; }
         
-        .home-content h3 { font-size: 20px; font-weight: 500; color: #ccc; margin-bottom: 10px; }
-        
-        /* Efek Nama Berkilau (Shimmer Effect) */
+        /* STATUS BADGE (FITUR BARU) */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 20px; background: rgba(0, 242, 234, 0.05);
+            border: 1px solid rgba(0, 242, 234, 0.3); border-radius: 30px;
+            font-size: 0.9rem; color: var(--main-color); margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .status-dot {
+            width: 8px; height: 8px; background: var(--main-color);
+            border-radius: 50%; box-shadow: 0 0 10px var(--main-color);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
         .home-content h1 { 
-            font-size: 55px; font-weight: 700; line-height: 1.1; margin-bottom: 15px; 
+            font-size: clamp(40px, 8vw, 70px); /* Responsif banget */
+            font-weight: 800; line-height: 1.1; margin-bottom: 10px; 
             background: linear-gradient(to right, #fff, #00f2ea, #fff);
             background-size: 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: shine 3s linear infinite;
         }
         @keyframes shine { to { background-position: 200% center; } }
         
-        /* Typing Text Style */
-        .typing-wrapper { font-size: 26px; font-weight: 600; color: var(--main-color); margin-bottom: 20px; height: 40px; }
-        .typing-text { border-right: 2px solid var(--main-color); padding-right: 5px; animation: blink 0.7s infinite; }
+        .typing-container {
+            min-height: 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;
+        }
+        
+        .typing-text { 
+            font-size: clamp(18px, 4vw, 28px);
+            font-weight: 600; color: var(--main-color);
+            border-right: 2px solid var(--main-color); padding-right: 5px; 
+            animation: blink 0.7s infinite;
+        }
         @keyframes blink { 50% { border-color: transparent; } }
 
         .home-content p { 
-            font-size: 16px; margin: 0 auto 35px; color: #aaa; line-height: 1.6; max-width: 500px;
+            font-size: 16px; margin: 0 auto 35px; color: #999; line-height: 1.7; max-width: 600px;
         }
 
-        /* Social Media & Buttons */
+        /* Socials */
         .social-media a {
             display: inline-flex; justify-content: center; align-items: center;
-            width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 50%; font-size: 18px; color: #ccc; margin: 0 8px;
-            transition: .3s;
+            width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%; font-size: 20px; color: #aaa; margin: 0 10px; transition: .3s;
         }
-        .social-media a:hover { border-color: var(--main-color); color: var(--main-color); background: rgba(0, 242, 234, 0.1); }
+        .social-media a:hover { border-color: var(--main-color); color: var(--main-color); transform: translateY(-3px); }
 
-        .btn-box { margin-top: 30px; display: flex; gap: 15px; justify-content: center; }
+        /* Buttons */
+        .btn-box { margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
         .btn {
-            padding: 12px 30px; background: var(--main-color); border-radius: 50px;
-            font-size: 15px; color: #000; font-weight: 600; box-shadow: 0 0 15px rgba(0, 242, 234, 0.3);
+            padding: 14px 35px; background: var(--main-color); border-radius: 50px;
+            font-size: 15px; color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.3); border: 1px solid var(--main-color);
         }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0, 242, 234, 0.6); }
+        
         .btn-outline { 
-            padding: 12px 30px; background: transparent; border: 1px solid var(--main-color);
-            border-radius: 50px; font-size: 15px; color: var(--main-color); font-weight: 600;
+            padding: 14px 35px; background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px; font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 0.5px;
         }
+        .btn-outline:hover { border-color: var(--main-color); color: var(--main-color); }
 
-        /* --- 4. SECTION GLOBAL --- */
-        section { padding: 70px 8%; }
-        .heading { text-align: center; font-size: 32px; margin-bottom: 40px; }
+        /* --- 4. GENERAL SECTION --- */
+        section { padding: 80px 8%; }
+        .heading { text-align: center; font-size: 32px; margin-bottom: 50px; font-weight: 700; }
         .heading span { color: var(--main-color); }
 
-        /* --- 5. SKILLS & TOOLS (Simplified Grid) --- */
-        .about { background: var(--second-bg); text-align: center; }
-        
-        .skills-container, .tools-container, .portfolio-container { 
-            display: grid; gap: 20px;
+        /* --- 5. SKILLS --- */
+        .skills-container { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; 
         }
-        
-        /* Grid Responsive Logic */
-        .skills-container { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-        
         .skill-box {
-            background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px;
-            border: 1px solid var(--border-glass); text-align: center;
+            background: rgba(255,255,255,0.03); padding: 35px 25px; border-radius: 15px;
+            border: 1px solid var(--border-glass); text-align: center; transition: 0.3s;
         }
-        .skill-box i { font-size: 35px; color: var(--main-color); margin-bottom: 15px; }
-        .skill-box h3 { font-size: 1.1rem; margin-bottom: 8px; }
-        .skill-box p { color: #888; font-size: 0.9rem; }
+        .skill-box:hover { border-color: var(--main-color); transform: translateY(-5px); }
+        .skill-box i { font-size: 40px; color: var(--main-color); margin-bottom: 20px; }
+        .skill-box h3 { font-size: 1.2rem; margin-bottom: 10px; color: #fff; }
+        .skill-box p { color: #888; font-size: 0.95rem; line-height: 1.6; }
 
-        /* Tools Grid (Lebih kecil rapat) */
-        .tools-container { 
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; 
-        }
+        /* --- 6. TOOLS --- */
+        .tools-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
         .tool-item { 
-            width: 80px; height: 80px; display: flex; justify-content: center; align-items: center; 
-            flex-direction: column; background: var(--second-bg); border-radius: 12px;
-            border: 1px solid var(--border-glass);
+            width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; 
+            flex-direction: column; background: var(--second-bg); border-radius: 15px;
+            border: 1px solid var(--border-glass); transition: 0.3s;
         }
-        .tool-item i, .tool-item img { font-size: 28px; width: 28px; height: 28px; object-fit: contain; margin-bottom: 5px; }
+        .tool-item:hover { border-color: var(--main-color); transform: translateY(-5px); }
+        .tool-item i, .tool-item img { font-size: 32px; width: 32px; height: 32px; object-fit: contain; margin-bottom: 8px; }
         .tool-item p { font-size: 11px; color: #aaa; }
+        
+        /* Warna Icon Tools */
+        .tool-item:hover .fa-html5 { color: #e34f26; }
+        .tool-item:hover .fa-css3-alt { color: #2965f1; }
+        .tool-item:hover .fa-windows { color: #00a4ef; }
+        .tool-item:hover .fa-video { color: #ff0055; } 
 
-        /* Warna Icon */
-        .fa-html5 { color: #e34f26; }
-        .fa-css3-alt { color: #2965f1; }
-        .fa-js { color: #f7df1e; }
-        .fa-wordpress { color: #21759b; }
-        .fa-windows { color: #00a4ef; }
-
-        /* --- 6. PORTFOLIO (Standard Grid) --- */
-        .portfolio-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-
+        /* --- 7. PORTFOLIO --- */
+        .portfolio-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); display: grid; gap: 25px; }
         .portfolio-box {
             position: relative; border-radius: 15px; overflow: hidden;
-            border: 1px solid var(--border-glass); height: 220px;
+            border: 1px solid var(--border-glass); height: 250px;
         }
-        .portfolio-box img { width: 100%; height: 100%; object-fit: cover; }
+        .portfolio-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         
         .portfolio-layer {
             position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center; flex-direction: column;
             text-align: center; padding: 0 20px;
-            background: linear-gradient(to top, #000, rgba(0,0,0,0.6)); 
-            opacity: 0; transition: 0.3s;
+            background: rgba(0,0,0,0.8); opacity: 0; transition: 0.3s;
         }
-        /* Di HP (Touch screen), hover diganti jadi selalu tampil judul dikit atau tetap hover */
         .portfolio-box:hover .portfolio-layer { opacity: 1; }
         
-        .portfolio-layer h4 { font-size: 1.3rem; margin-bottom: 5px; }
-        .portfolio-layer p { font-size: 0.9rem; margin-bottom: 10px; color: var(--main-color); }
+        .portfolio-layer h4 { font-size: 1.3rem; margin-bottom: 5px; color: #fff; }
+        .portfolio-layer p { font-size: 0.9rem; margin-bottom: 15px; color: var(--main-color); }
         .portfolio-layer a {
-            width: 40px; height: 40px; background: #fff; border-radius: 50%;
+            width: 45px; height: 45px; background: #fff; border-radius: 50%;
             display: flex; justify-content: center; align-items: center; color: #000;
         }
 
-        /* --- 7. CONTACT & FOOTER --- */
-        .contact { background: var(--second-bg); text-align: center; }
-        .footer { padding: 20px; text-align: center; background: var(--bg-color); font-size: 0.85rem; color: #666; border-top: 1px solid var(--border-glass); }
+        /* --- 8. CONTACT & FOOTER --- */
+        .contact { background: var(--second-bg); text-align: center; border-top: 1px solid var(--border-glass); }
+        .footer { padding: 30px; text-align: center; background: var(--bg-color); font-size: 0.9rem; color: #666; }
 
-        /* --- 8. RESPONSIVE (Mobile Specific) --- */
+        /* --- 9. RESPONSIVE (MOBILE FIX) --- */
         @media (max-width: 768px) {
-            header { padding: 12px 5%; background: #080808; } /* Header solid di HP */
+            header { padding: 15px 5%; }
             
             #menu-icon { display: block; }
             .navbar {
                 position: absolute; top: 100%; left: 0; width: 100%;
-                background: #080808; border-top: 1px solid var(--border-glass);
-                flex-direction: column; padding: 20px; display: none;
+                background: #0a0a0a; border-top: 1px solid var(--border-glass);
+                flex-direction: column; padding: 30px 0; display: none;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.8);
             }
             .navbar.active { display: flex; }
-            .navbar a { margin: 15px 0; font-size: 1.1rem; display: block; text-align: center; }
+            .navbar a { margin: 15px 0; font-size: 1.2rem; display: block; text-align: center; }
 
-            .home { padding-top: 120px; } /* Biar teks tidak ketutup header */
-            .home-content h1 { font-size: 42px; } /* Font judul di HP */
+            .home { padding-top: 120px; }
             
-            .btn-box { flex-direction: column; width: 100%; }
+            /* Tombol full width di HP agar mudah ditekan */
+            .btn-box { width: 100%; flex-direction: column; gap: 15px; }
             .btn, .btn-outline { width: 100%; text-align: center; }
             
-            /* Biar portfolio di HP grid 1 kolom */
             .portfolio-container { grid-template-columns: 1fr; }
         }
     </style>
@@ -220,8 +232,7 @@
         <i class="fas fa-bars" id="menu-icon"></i>
         <nav class="navbar">
             <a href="#home" class="active">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Services</a>
+            <a href="#skills">Skills</a>
             <a href="#tools">Tools</a>
             <a href="#portfolio">Portfolio</a>
             <a href="#contact">Contact</a>
@@ -230,19 +241,24 @@
 
     <section class="home" id="home">
         <div class="home-content">
-            <h3>Halo, Saya</h3>
+            
+            <div class="status-badge">
+                <span class="status-dot"></span> Available for Projects
+            </div>
+
             <h1>Satria</h1>
-            <div class="typing-wrapper">
-                I'm a <span class="typing-text"></span>
+            
+            <div class="typing-container">
+                I'm a&nbsp;<span class="typing-text"></span>
             </div>
             
+            <p>Profesional IT dengan keahlian perbaikan hardware, pengembangan web, serta editing kreatif foto & video. Solusi presisi, hasil estetik.</p>
+
             <div class="social-media">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
             </div>
-
-            <p>Menggabungkan logika teknis perbaikan hardware dengan kreativitas web modern. Solusi digital yang presisi dan estetik.</p>
 
             <div class="btn-box">
                 <a href="#contact" class="btn">Hubungi Saya</a>
@@ -251,32 +267,28 @@
         </div>
     </section>
 
-    <section class="about" id="about">
-        <h2 class="heading">Tentang <span>Saya</span></h2>
-        <div style="max-width: 700px; margin: 0 auto;">
-            <p style="color: #bbb; line-height: 1.8; margin-bottom: 20px;">
-                Berawal dari hobi mengoprek komputer, kini saya memiliki keahlian mendalam di bidang Hardware Laptop, Rakit PC, hingga Coding Website. Fotografi adalah cara saya menyeimbangkan sisi teknis dengan seni visual.
-            </p>
-        </div>
-    </section>
-
     <section class="skills" id="skills">
         <h2 class="heading">Keahlian <span>Saya</span></h2>
         <div class="skills-container">
             <div class="skill-box">
-                <i class="fas fa-code"></i>
+                <i class="fas fa-laptop-code"></i>
                 <h3>Web Development</h3>
-                <p>HTML, CSS, JS, dan CMS.</p>
+                <p>Membangun website responsif, landing page modern, & kustomisasi CMS Wordpress.</p>
             </div>
             <div class="skill-box">
                 <i class="fas fa-microchip"></i>
-                <h3>Hardware Repair</h3>
-                <p>Servis laptop, rakit PC, upgrade.</p>
+                <h3>Hardware IT</h3>
+                <p>Diagnosa kerusakan laptop, rakit PC gaming/office, & maintenance sistem.</p>
             </div>
             <div class="skill-box">
-                <i class="fas fa-camera"></i>
+                <i class="fas fa-video"></i>
+                <h3>Photo & Video Editing</h3>
+                <p>Color grading, cinematic cut (Premiere/CapCut), & retouching foto (Lightroom).</p>
+            </div>
+            <div class="skill-box">
+                <i class="fas fa-camera-retro"></i>
                 <h3>Photography</h3>
-                <p>Event, Wisuda, Portrait.</p>
+                <p>Dokumentasi event, wisuda, dan portrait dengan komposisi profesional.</p>
             </div>
         </div>
     </section>
@@ -287,15 +299,16 @@
             <div class="tool-item"><i class="fab fa-html5"></i><p>HTML5</p></div>
             <div class="tool-item"><i class="fab fa-css3-alt"></i><p>CSS3</p></div>
             <div class="tool-item"><i class="fab fa-js"></i><p>JS</p></div>
-            <div class="tool-item"><i class="fab fa-wordpress"></i><p>WP</p></div>
-            <div class="tool-item"><i class="fab fa-windows"></i><p>Win</p></div>
+            <div class="tool-item"><i class="fab fa-windows"></i><p>Windows</p></div>
+            <div class="tool-item"><i class="fas fa-film" style="color:#ff0055;"></i><p>Premiere</p></div>
             <div class="tool-item"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/CapCut_icon.svg" alt="CapCut"><p>CapCut</p></div>
+            <div class="tool-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg" alt="Lr"><p>Lightroom</p></div>
             <div class="tool-item"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg" alt="Canva"><p>Canva</p></div>
         </div>
     </section>
 
     <section class="portfolio" id="portfolio">
-        <h2 class="heading">Karya <span>Terpilih</span></h2>
+        <h2 class="heading">Project <span>Terbaru</span></h2>
         <div class="portfolio-container">
             <div class="portfolio-box">
                 <img src="img/coffe.png" alt="Web" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
@@ -314,19 +327,19 @@
                 </div>
             </div>
             <div class="portfolio-box">
-                <img src="img/showroom.png" alt="Foto" onerror="this.src='https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1000'">
+                <img src="img/showroom.png" alt="Video" onerror="this.src='https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=1000'">
                 <div class="portfolio-layer">
-                    <h4>Wisuda Gallery</h4>
-                    <p>Photography</p>
-                    <a href="#"><i class="fas fa-eye"></i></a>
+                    <h4>Cinematic Video</h4>
+                    <p>Video Editing</p>
+                    <a href="#"><i class="fas fa-play"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2 class="heading">Siap <span>Berkolaborasi?</span></h2>
-        <p>Punya proyek menarik atau laptop yang perlu diselamatkan? Mari ngobrol!</p>
+        <h2 class="heading">Tertarik <span>Bekerjasama?</span></h2>
+        <p style="margin-bottom:30px; color:#aaa;">Mari diskusikan proyek website, perbaikan, atau editing Anda.</p>
         <a href="https://wa.me/6281234567890" class="btn">Chat WhatsApp</a>
     </section>
 
@@ -337,7 +350,7 @@
     <script>
         // 1. Typing Animation (Manual JS Ringan)
         const typingText = document.querySelector(".typing-text");
-        const words = ["Web Developer", "IT Technician", "Photographer"];
+        const words = ["Web Developer", "Hardware Expert", "Video Editor", "Photographer"];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -345,36 +358,30 @@
         const typeEffect = () => {
             const currentWord = words[wordIndex];
             const currentChar = currentWord.substring(0, charIndex);
-            
             typingText.textContent = currentChar;
 
             if (!isDeleting && charIndex < currentWord.length) {
-                // Sedang ngetik
                 charIndex++;
                 setTimeout(typeEffect, 100);
             } else if (isDeleting && charIndex > 0) {
-                // Sedang hapus
                 charIndex--;
                 setTimeout(typeEffect, 50);
             } else {
-                // Selesai ngetik atau hapus satu kata
                 isDeleting = !isDeleting;
-                if (!isDeleting) {
-                    wordIndex = !isDeleting ? (wordIndex + 1) % words.length : wordIndex;
-                }
-                setTimeout(typeEffect, 1200); // Jeda sebelum ganti kata
+                if (!isDeleting) wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(typeEffect, 1200);
             }
         }
         typeEffect();
 
-        // 2. Scroll Progress Bar
+        // 2. Scroll Progress
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
             
-            // Tutup menu mobile jika scroll
+            // Close menu on scroll
             menuIcon.classList.remove('fa-times');
             navbar.classList.remove('active');
         };
