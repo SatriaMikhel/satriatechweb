@@ -3,26 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Creative Portfolio</title>
+    <title>Satria | Shadow Monarch Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. VARIABLES & RESET --- */
+        /* --- 1. VARIABLES & RESET (SOLO LEVELING THEME) --- */
         :root {
-            --bg-color: #0a0a0a;
-            --second-bg: #121212;
+            --bg-color: #05020a; /* Hitam keunguan sangat gelap (Abyss) */
+            --second-bg: #0f0518; /* Ungu gelap untuk kartu */
             --text-color: #e0e0e0;
-            --main-color: #00f2ea; /* Cyan Neon */
-            --border-glass: rgba(255, 255, 255, 0.08);
+            
+            /* WARNA UTAMA: SUNG JIN-WOO PURPLE */
+            --main-color: #9d00ff; /* Ungu Neon Menyala */
+            --accent-hover: #bf55ff; /* Ungu lebih terang saat hover */
+            
+            --border-glass: rgba(157, 0, 255, 0.2); /* Border ungu transparan */
             --font-main: 'Outfit', sans-serif;
+            
+            /* Efek Glow Bayangan (Shadow Army Aura) */
+            --shadow-glow: 0 0 15px rgba(157, 0, 255, 0.6);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            background: var(--bg-color);
+            /* Background Gelap dengan pantulan ungu di tengah */
+            background: radial-gradient(circle at center, #1a002e 0%, #05020a 80%);
             color: var(--text-color);
             font-family: var(--font-main);
             overflow-x: hidden;
@@ -43,7 +51,7 @@
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             padding: 15px 8%;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(5, 2, 10, 0.95); /* Header Ungu gelap pekat */
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; border-bottom: 1px solid var(--border-glass);
         }
@@ -65,33 +73,40 @@
             display: flex; align-items: center; justify-content: center;
             text-align: center;
             padding: 130px 5% 80px;
-            background: radial-gradient(circle at center, #181818 0%, #0a0a0a 70%);
+            background: radial-gradient(circle at center, #1a002e 0%, #05020a 70%);
         }
 
         .home-content { max-width: 700px; width: 100%; display: flex; flex-direction: column; align-items: center; }
         
-        /* STATUS BADGE (FITUR BARU) */
+        /* STATUS BADGE */
         .status-badge {
             display: inline-flex; align-items: center; gap: 10px;
-            padding: 8px 20px; background: rgba(0, 242, 234, 0.05);
-            border: 1px solid rgba(0, 242, 234, 0.3); border-radius: 30px;
-            font-size: 0.9rem; color: var(--main-color); margin-bottom: 25px;
+            padding: 8px 20px; background: rgba(157, 0, 255, 0.05); /* Ungu transparan */
+            border: 1px solid rgba(157, 0, 255, 0.3); /* Border ungu */
+            border-radius: 30px;
+            font-size: 0.9rem; color: #d8b4fe; /* Teks ungu muda */
+            margin-bottom: 25px;
             font-weight: 500;
         }
         .status-dot {
-            width: 8px; height: 8px; background: var(--main-color);
-            border-radius: 50%; box-shadow: 0 0 10px var(--main-color);
+            width: 8px; height: 8px; background: #bf55ff; /* Titik ungu */
+            border-radius: 50%; box-shadow: 0 0 10px #bf55ff; /* Glow titik */
             animation: pulse 2s infinite;
         }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         .home-content h1 { 
-            font-size: clamp(40px, 8vw, 70px); /* Responsif banget */
+            font-size: clamp(40px, 8vw, 70px);
             font-weight: 800; line-height: 1.1; margin-bottom: 10px; 
-            background: linear-gradient(to right, #fff, #00f2ea, #fff);
+            
+            /* Gradient Ungu ke Putih */
+            background: linear-gradient(to right, #fff, var(--main-color), #fff);
             background-size: 200%;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: shine 3s linear infinite;
+            
+            /* Efek Glow Teks Nama */
+            text-shadow: 0 0 20px rgba(157, 0, 255, 0.5);
         }
         @keyframes shine { to { background-position: 200% center; } }
         
@@ -114,23 +129,34 @@
         /* Socials */
         .social-media a {
             display: inline-flex; justify-content: center; align-items: center;
-            width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.1);
+            width: 45px; height: 45px; border: 1px solid var(--border-glass); /* Border ungu */
             border-radius: 50%; font-size: 20px; color: #aaa; margin: 0 10px; transition: .3s;
         }
         .social-media a:hover { border-color: var(--main-color); color: var(--main-color); transform: translateY(-3px); }
 
-        /* Buttons */
+        /* Buttons (ARiSE!) */
         .btn-box { margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         
         .btn {
-            padding: 14px 35px; background: var(--main-color); border-radius: 50px;
-            font-size: 15px; color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(0, 242, 234, 0.3); border: 1px solid var(--main-color);
+            padding: 14px 35px; 
+            background: var(--main-color); 
+            color: #fff; /* Teks putih biar kontras */
+            border-radius: 50px; font-size: 15px; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px;
+            border: 1px solid var(--main-color);
+            
+            /* Glow Box */
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.4); 
         }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0, 242, 234, 0.6); }
+        .btn:hover {
+            background: #000; /* Saat hover jadi hitam */
+            color: var(--main-color); /* Teks jadi ungu */
+            box-shadow: 0 0 30px rgba(157, 0, 255, 0.8); /* Glow makin terang */
+            transform: translateY(-3px);
+        }
         
         .btn-outline { 
-            padding: 14px 35px; background: transparent; border: 1px solid rgba(255,255,255,0.2);
+            padding: 14px 35px; background: transparent; border: 1px solid var(--border-glass); /* Border ungu */
             border-radius: 50px; font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 0.5px;
         }
         .btn-outline:hover { border-color: var(--main-color); color: var(--main-color); }
@@ -145,7 +171,8 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; 
         }
         .skill-box {
-            background: rgba(255,255,255,0.03); padding: 35px 25px; border-radius: 15px;
+            background: var(--second-bg); /* Ungu gelap */
+            padding: 35px 25px; border-radius: 15px;
             border: 1px solid var(--border-glass); text-align: center; transition: 0.3s;
         }
         .skill-box:hover { border-color: var(--main-color); transform: translateY(-5px); }
@@ -157,24 +184,26 @@
         .tools-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
         .tool-item { 
             width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; 
-            flex-direction: column; background: var(--second-bg); border-radius: 15px;
+            flex-direction: column; background: var(--second-bg); /* Ungu gelap */
+            border-radius: 15px;
             border: 1px solid var(--border-glass); transition: 0.3s;
         }
         .tool-item:hover { border-color: var(--main-color); transform: translateY(-5px); }
         .tool-item i, .tool-item img { font-size: 32px; width: 32px; height: 32px; object-fit: contain; margin-bottom: 8px; }
         .tool-item p { font-size: 11px; color: #aaa; }
         
-        /* Warna Icon Tools */
+        /* Warna Icon Tools (tetap asli, kecuali ikon film) */
         .tool-item:hover .fa-html5 { color: #e34f26; }
         .tool-item:hover .fa-css3-alt { color: #2965f1; }
         .tool-item:hover .fa-windows { color: #00a4ef; }
-        .tool-item:hover .fa-video { color: #ff0055; } 
+        .tool-item:hover .fa-film { color: var(--main-color); } /* Icon Film ikut ungu */
 
         /* --- 7. PORTFOLIO --- */
         .portfolio-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); display: grid; gap: 25px; }
         .portfolio-box {
             position: relative; border-radius: 15px; overflow: hidden;
-            border: 1px solid var(--border-glass); height: 250px;
+            border: 1px solid var(--border-glass); /* Border ungu */
+            height: 250px;
         }
         .portfolio-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         
@@ -213,7 +242,6 @@
 
             .home { padding-top: 120px; }
             
-            /* Tombol full width di HP agar mudah ditekan */
             .btn-box { width: 100%; flex-direction: column; gap: 15px; }
             .btn, .btn-outline { width: 100%; text-align: center; }
             
