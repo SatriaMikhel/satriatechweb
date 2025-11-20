@@ -50,8 +50,35 @@
             z-index: 1000; border-bottom: 1px solid var(--border-glass);
         }
 
-        .logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
-        .logo span { color: var(--main-color); }
+        /* LOGO BARU: GRADIENT TEKS + SHINE */
+        .logo { 
+            font-size: 22px; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            position: relative;
+            
+            /* Gradient Teks (Mirip Judul Utama) */
+            background: linear-gradient(to right, var(--main-color), #ffffff, var(--main-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: logoShine 5s linear infinite; /* Animasi cahaya */
+
+            text-shadow: 0 0 8px rgba(0, 242, 234, 0.5); /* Efek glow halus */
+        }
+
+        /* Animasi untuk Logo Shine */
+        @keyframes logoShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .logo span { 
+            color: var(--main-color); /* Tetap cyan neon untuk titik */
+            text-shadow: none; /* Hilangkan shadow dari titik agar lebih fokus ke teks utama */
+        }
+        /* END LOGO BARU */
 
         .navbar { display: flex; }
         .navbar a {
@@ -409,6 +436,7 @@
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
             
+            // Close menu on scroll
             menuIcon.classList.remove('fa-times');
             navbar.classList.remove('active');
         };
