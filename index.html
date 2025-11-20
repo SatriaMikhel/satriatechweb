@@ -3,34 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Shadow Monarch Portfolio</title>
+    <title>Satria | Creative Portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- 1. VARIABLES & RESET (SOLO LEVELING THEME) --- */
+        /* --- 1. VARIABLES & RESET --- */
         :root {
-            --bg-color: #05020a; /* Hitam keunguan sangat gelap (Abyss) */
-            --second-bg: #0f0518; /* Ungu gelap untuk kartu */
+            --bg-color: #02050a; /* Hitam kebiruan (Deep Space) */
+            --second-bg: #0a1018; /* Sedikit lebih terang untuk kartu */
             --text-color: #e0e0e0;
-            
-            /* WARNA UTAMA: SUNG JIN-WOO PURPLE */
-            --main-color: #9d00ff; /* Ungu Neon Menyala */
-            --accent-hover: #bf55ff; /* Ungu lebih terang saat hover */
-            
-            --border-glass: rgba(157, 0, 255, 0.2); /* Border ungu transparan */
+            --main-color: #00f2ea; /* Cyan Neon */
+            --secondary-color: #0044cc; /* Biru Tua */
+            --border-glass: rgba(255, 255, 255, 0.08);
             --font-main: 'Outfit', sans-serif;
-            
-            /* Efek Glow Bayangan (Shadow Army Aura) */
-            --shadow-glow: 0 0 15px rgba(157, 0, 255, 0.6);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            /* Background Gelap dengan pantulan ungu di tengah */
-            background: radial-gradient(circle at center, #1a002e 0%, #05020a 80%);
+            background: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-main);
             overflow-x: hidden;
@@ -51,7 +44,8 @@
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             padding: 15px 8%;
-            background: rgba(5, 2, 10, 0.95); /* Header Ungu gelap pekat */
+            background: rgba(2, 5, 10, 0.9); /* Transparan gelap */
+            backdrop-filter: blur(10px); /* Efek blur di belakang header */
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; border-bottom: 1px solid var(--border-glass);
         }
@@ -67,30 +61,53 @@
 
         #menu-icon { font-size: 24px; color: var(--text-color); display: none; cursor: pointer; }
 
-        /* --- 3. HERO SECTION --- */
+        /* --- 3. HERO SECTION (NEON AURORA EFFECT) --- */
         .home {
             min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             text-align: center;
             padding: 130px 5% 80px;
-            background: radial-gradient(circle at center, #1a002e 0%, #05020a 70%);
+            position: relative;
+            overflow: hidden; /* Agar cahaya tidak bocor */
         }
 
-        .home-content { max-width: 700px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        /* Background Blob Animation (Cahaya Bergerak) */
+        .blob-cont {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+        }
+        .blob {
+            position: absolute; border-radius: 50%;
+            filter: blur(80px); opacity: 0.5;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        .blob-1 {
+            top: 10%; left: 20%; width: 300px; height: 300px;
+            background: var(--secondary-color);
+        }
+        .blob-2 {
+            bottom: 20%; right: 20%; width: 250px; height: 250px;
+            background: var(--main-color);
+            animation-delay: -5s;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20px, -20px) scale(1.1); }
+        }
+
+        .home-content { max-width: 700px; width: 100%; display: flex; flex-direction: column; align-items: center; z-index: 2; }
         
         /* STATUS BADGE */
         .status-badge {
             display: inline-flex; align-items: center; gap: 10px;
-            padding: 8px 20px; background: rgba(157, 0, 255, 0.05); /* Ungu transparan */
-            border: 1px solid rgba(157, 0, 255, 0.3); /* Border ungu */
-            border-radius: 30px;
-            font-size: 0.9rem; color: #d8b4fe; /* Teks ungu muda */
-            margin-bottom: 25px;
-            font-weight: 500;
+            padding: 8px 20px; background: rgba(0, 242, 234, 0.05);
+            border: 1px solid rgba(0, 242, 234, 0.3); border-radius: 30px;
+            font-size: 0.9rem; color: var(--main-color); margin-bottom: 25px;
+            font-weight: 500; backdrop-filter: blur(5px);
         }
         .status-dot {
-            width: 8px; height: 8px; background: #bf55ff; /* Titik ungu */
-            border-radius: 50%; box-shadow: 0 0 10px #bf55ff; /* Glow titik */
+            width: 8px; height: 8px; background: var(--main-color);
+            border-radius: 50%; box-shadow: 0 0 10px var(--main-color);
             animation: pulse 2s infinite;
         }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
@@ -98,17 +115,9 @@
         .home-content h1 { 
             font-size: clamp(40px, 8vw, 70px);
             font-weight: 800; line-height: 1.1; margin-bottom: 10px; 
-            
-            /* Gradient Ungu ke Putih */
-            background: linear-gradient(to right, #fff, var(--main-color), #fff);
-            background-size: 200%;
+            background: linear-gradient(to right, #fff, var(--main-color));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-            
-            /* Efek Glow Teks Nama */
-            text-shadow: 0 0 20px rgba(157, 0, 255, 0.5);
         }
-        @keyframes shine { to { background-position: 200% center; } }
         
         .typing-container {
             min-height: 40px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;
@@ -123,40 +132,30 @@
         @keyframes blink { 50% { border-color: transparent; } }
 
         .home-content p { 
-            font-size: 16px; margin: 0 auto 35px; color: #999; line-height: 1.7; max-width: 600px;
+            font-size: 16px; margin: 0 auto 35px; color: #aaa; line-height: 1.7; max-width: 600px;
         }
 
         /* Socials */
         .social-media a {
             display: inline-flex; justify-content: center; align-items: center;
-            width: 45px; height: 45px; border: 1px solid var(--border-glass); /* Border ungu */
+            width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50%; font-size: 20px; color: #aaa; margin: 0 10px; transition: .3s;
+            background: rgba(0,0,0,0.3);
         }
         .social-media a:hover { border-color: var(--main-color); color: var(--main-color); transform: translateY(-3px); }
 
-        /* Buttons (ARiSE!) */
+        /* Buttons */
         .btn-box { margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         
         .btn {
-            padding: 14px 35px; 
-            background: var(--main-color); 
-            color: #fff; /* Teks putih biar kontras */
-            border-radius: 50px; font-size: 15px; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px;
-            border: 1px solid var(--main-color);
-            
-            /* Glow Box */
-            box-shadow: 0 0 20px rgba(157, 0, 255, 0.4); 
+            padding: 14px 35px; background: var(--main-color); border-radius: 50px;
+            font-size: 15px; color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(0, 242, 234, 0.3); border: 1px solid var(--main-color);
         }
-        .btn:hover {
-            background: #000; /* Saat hover jadi hitam */
-            color: var(--main-color); /* Teks jadi ungu */
-            box-shadow: 0 0 30px rgba(157, 0, 255, 0.8); /* Glow makin terang */
-            transform: translateY(-3px);
-        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(0, 242, 234, 0.6); }
         
         .btn-outline { 
-            padding: 14px 35px; background: transparent; border: 1px solid var(--border-glass); /* Border ungu */
+            padding: 14px 35px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2);
             border-radius: 50px; font-size: 15px; color: #fff; font-weight: 600; letter-spacing: 0.5px;
         }
         .btn-outline:hover { border-color: var(--main-color); color: var(--main-color); }
@@ -171,8 +170,7 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; 
         }
         .skill-box {
-            background: var(--second-bg); /* Ungu gelap */
-            padding: 35px 25px; border-radius: 15px;
+            background: var(--second-bg); padding: 35px 25px; border-radius: 15px;
             border: 1px solid var(--border-glass); text-align: center; transition: 0.3s;
         }
         .skill-box:hover { border-color: var(--main-color); transform: translateY(-5px); }
@@ -184,26 +182,23 @@
         .tools-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
         .tool-item { 
             width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; 
-            flex-direction: column; background: var(--second-bg); /* Ungu gelap */
-            border-radius: 15px;
+            flex-direction: column; background: var(--second-bg); border-radius: 15px;
             border: 1px solid var(--border-glass); transition: 0.3s;
         }
         .tool-item:hover { border-color: var(--main-color); transform: translateY(-5px); }
         .tool-item i, .tool-item img { font-size: 32px; width: 32px; height: 32px; object-fit: contain; margin-bottom: 8px; }
         .tool-item p { font-size: 11px; color: #aaa; }
         
-        /* Warna Icon Tools (tetap asli, kecuali ikon film) */
         .tool-item:hover .fa-html5 { color: #e34f26; }
         .tool-item:hover .fa-css3-alt { color: #2965f1; }
         .tool-item:hover .fa-windows { color: #00a4ef; }
-        .tool-item:hover .fa-film { color: var(--main-color); } /* Icon Film ikut ungu */
+        .tool-item:hover .fa-video { color: #ff0055; } 
 
-        /* --- 7. PORTFOLIO --- */
+        /* --- 7. PORTFOLIO (STANDARD GRID) --- */
         .portfolio-container { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); display: grid; gap: 25px; }
         .portfolio-box {
             position: relative; border-radius: 15px; overflow: hidden;
-            border: 1px solid var(--border-glass); /* Border ungu */
-            height: 250px;
+            border: 1px solid var(--border-glass); height: 250px;
         }
         .portfolio-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         
@@ -233,7 +228,7 @@
             #menu-icon { display: block; }
             .navbar {
                 position: absolute; top: 100%; left: 0; width: 100%;
-                background: #0a0a0a; border-top: 1px solid var(--border-glass);
+                background: var(--bg-color); border-top: 1px solid var(--border-glass);
                 flex-direction: column; padding: 30px 0; display: none;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.8);
             }
@@ -241,6 +236,7 @@
             .navbar a { margin: 15px 0; font-size: 1.2rem; display: block; text-align: center; }
 
             .home { padding-top: 120px; }
+            .blob { width: 200px; height: 200px; } /* Kecilkan blob di HP */
             
             .btn-box { width: 100%; flex-direction: column; gap: 15px; }
             .btn, .btn-outline { width: 100%; text-align: center; }
@@ -268,8 +264,12 @@
     </header>
 
     <section class="home" id="home">
+        <div class="blob-cont">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
+
         <div class="home-content">
-            
             <div class="status-badge">
                 <span class="status-dot"></span> Available for Projects
             </div>
@@ -376,7 +376,7 @@
     </footer>
 
     <script>
-        // 1. Typing Animation (Manual JS Ringan)
+        // 1. Typing Animation
         const typingText = document.querySelector(".typing-text");
         const words = ["Web Developer", "Hardware Expert", "Video Editor", "Photographer"];
         let wordIndex = 0;
@@ -409,7 +409,6 @@
             let scrolled = (winScroll / height) * 100;
             document.getElementById("progressBar").style.width = scrolled + "%";
             
-            // Close menu on scroll
             menuIcon.classList.remove('fa-times');
             navbar.classList.remove('active');
         };
