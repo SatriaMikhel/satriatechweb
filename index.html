@@ -3,324 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Digital Portfolio</title>
+    <title>Satria | Digital Craftsman</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- 1. DESIGN TOKENS (Professional Dark Theme) --- */
         :root {
-            --bg-main: #0a0a0a;
-            --bg-secondary: #111111;
-            --text-white: #ffffff;
-            --text-muted: #a1a1aa;
-            
-            /* Accent: Electric Indigo (Terlihat Mahal & Tech) */
-            --accent: #6366f1; 
-            --accent-glow: rgba(99, 102, 241, 0.4);
-            
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-bg: rgba(20, 20, 20, 0.7);
+            --bg: #030303;
+            --text: #e0e0e0;
+            --accent: #fff; /* Monochrome style untuk kesan mahal */
+            --highlight: #00f0ff; /* Cyber Cyan tipis untuk detil */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-white);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
+            padding-bottom: 100px; /* Space for bottom nav */
         }
 
-        /* Background Gradient Mesh (Subtle) */
-        .bg-mesh {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
-            background: radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08), transparent 25%),
-                        radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.05), transparent 25%);
+        /* --- SPOTLIGHT EFFECT (Background Mewah) --- */
+        .spotlight {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            z-index: -2;
+        }
+        
+        /* Grid halus biar techy */
+        .grid-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1; pointer-events: none;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
-        h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
 
-        /* --- 2. NAVBAR (Mobile Friendly & Glass) --- */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 20px 8%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
-        .logo span { color: var(--accent); }
-
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
-        .nav-links a:hover, .nav-links a.active { color: white; }
-
-        .cta-small {
-            padding: 10px 24px; border: 1px solid var(--glass-border);
-            border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-            background: rgba(255,255,255,0.03); transition: 0.3s;
-        }
-        .cta-small:hover { border-color: var(--accent); color: var(--accent); }
-
-        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: white; }
-
-        /* --- 3. HERO SECTION --- */
+        /* --- HERO (Personal Branding Kuat) --- */
         .hero {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; padding: 120px 8% 80px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 800; line-height: 1.1; margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;
-        }
-
-        .hero-btn {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 16px 40px; background: var(--text-white); color: black;
-            border-radius: 50px; font-weight: 700; font-size: 1rem;
-            transition: transform 0.3s;
-        }
-        .hero-btn:hover { transform: translateY(-4px); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
-
-        /* --- 4. EXPERTISE (Keahlian Tetap Ada & Rapi) --- */
-        .section { padding: 100px 8%; }
-        .section-header { margin-bottom: 60px; }
-        .section-header h2 { font-size: 2rem; margin-bottom: 10px; }
-        .section-header span { color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
-
-        .grid-3 {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
-
-        .card {
-            background: var(--bg-secondary); border: 1px solid var(--glass-border);
-            padding: 40px; border-radius: 16px; transition: 0.4s; position: relative; overflow: hidden;
-        }
-        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        
-        .card-icon { 
-            font-size: 2rem; color: var(--accent); margin-bottom: 20px; 
-            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
-            background: rgba(99, 102, 241, 0.1); border-radius: 10px;
-        }
-        .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* --- 5. SELECTED WORK (Portfolio) --- */
-        .project-card {
-            display: block; position: relative; border-radius: 20px; overflow: hidden;
-            aspect-ratio: 16/9; cursor: pointer; border: 1px solid var(--glass-border);
-        }
-        .project-img {
-            width: 100%; height: 100%; object-fit: cover; transition: 0.6s;
-            filter: grayscale(20%);
-        }
-        .project-overlay {
-            position: absolute; bottom: 0; left: 0; width: 100%;
-            padding: 40px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            transform: translateY(20px); opacity: 0; transition: 0.4s;
+            min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 0 8%; position: relative;
         }
         
-        /* Hover Effects */
-        .project-card:hover .project-img { transform: scale(1.05); filter: grayscale(0%); }
-        .project-card:hover .project-overlay { transform: translateY(0); opacity: 1; }
+        .role-label {
+            font-size: 0.9rem; color: var(--highlight); margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .line { width: 40px; height: 1px; background: var(--highlight); }
 
-        .project-overlay h3 { font-size: 1.5rem; margin-bottom: 5px; }
-        .project-overlay p { color: var(--text-muted); margin-bottom: 0; font-size: 0.9rem; }
-        .badge { 
-            display: inline-block; padding: 4px 12px; background: var(--accent); 
-            color: white; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin-bottom: 10px;
+        .hero-name {
+            font-size: clamp(3rem, 12vw, 9rem);
+            font-weight: 700; line-height: 0.9; color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.5); /* Outline Text Effect */
+            transition: 0.5s;
+        }
+        .hero-name:hover { -webkit-text-stroke: 1px #fff; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        
+        .hero-desc {
+            font-size: 1.2rem; max-width: 500px; margin-top: 30px; color: #888;
+            border-left: 2px solid var(--highlight); padding-left: 20px;
         }
 
-        /* --- 6. FOOTER (Simple Professional) --- */
-        footer {
-            padding: 80px 8%; border-top: 1px solid var(--glass-border);
-            text-align: center;
+        /* --- SKILLS (List Style - Bukan Kartu Jualan) --- */
+        .skills-section { padding: 50px 8%; }
+        .section-title { font-size: 1rem; color: #666; margin-bottom: 40px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        
+        .skill-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 0; border-bottom: 1px solid #1a1a1a; transition: 0.3s;
         }
-        .footer-cta h2 { font-size: 2.5rem; margin-bottom: 30px; }
-        .social-link {
-            font-size: 1.5rem; margin: 0 15px; color: var(--text-muted); transition: 0.3s;
-        }
-        .social-link:hover { color: white; transform: scale(1.2); }
+        .skill-item:hover { padding-left: 20px; border-bottom: 1px solid var(--highlight); }
+        .skill-name { font-size: 1.5rem; font-weight: 600; }
+        .skill-desc { font-size: 0.9rem; color: #666; text-align: right; }
 
-        /* --- 7. MOBILE RESPONSIVE FIXES --- */
+        /* --- PROJECT SHOWCASE (Big & Bold) --- */
+        .projects-section { padding: 100px 8%; }
+        
+        .project-block {
+            margin-bottom: 120px; position: relative;
+        }
+        .project-image {
+            width: 100%; height: auto; border-radius: 4px; filter: grayscale(100%) contrast(1.1);
+            transition: 0.5s; cursor: pointer;
+        }
+        .project-block:hover .project-image { filter: grayscale(0%); }
+        
+        .project-meta {
+            display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px;
+        }
+        .project-title { font-size: 2rem; margin-bottom: 5px; }
+        .project-tags { font-size: 0.8rem; color: var(--highlight); font-family: 'Space Grotesk', sans-serif; letter-spacing: 1px; }
+        .view-btn { 
+            font-size: 3rem; transform: rotate(-45deg); transition: 0.3s;
+        }
+        .project-block:hover .view-btn { transform: rotate(0) translateX(10px); color: var(--highlight); }
+
+        /* --- FLOATING DOCK (Mobile Nav Kekinian) --- */
+        .dock-nav {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(10px);
+            padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; gap: 30px; align-items: center; z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .dock-item { font-size: 1.2rem; color: #888; transition: 0.3s; position: relative; }
+        .dock-item:hover, .dock-item.active { color: #fff; transform: translateY(-5px); }
+        .dock-item::after {
+            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 3px; background: var(--highlight); transition: 0.3s; border-radius: 2px;
+        }
+        .dock-item.active::after { width: 20px; }
+
+        /* --- SOCIAL OVERLAY --- */
+        .social-corner { position: fixed; top: 40px; right: 8%; z-index: 100; mix-blend-mode: difference; }
+        .ig-btn { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #fff; padding-bottom: 2px; }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            header { padding: 15px 5%; }
-            .nav-links {
-                position: absolute; top: 70px; left: 0; width: 100%;
-                background: var(--bg-main); border-bottom: 1px solid var(--glass-border);
-                flex-direction: column; padding: 40px; gap: 20px; align-items: center;
-                transform: translateY(-150%); transition: 0.4s; z-index: 999;
-            }
-            .nav-links.active { transform: translateY(0); }
-            
-            .hamburger { display: block; }
-            .cta-small { display: none; } /* Hide top button on mobile */
-
-            .hero h1 { font-size: 2.5rem; }
-            .section { padding: 80px 5%; }
-            .project-card { aspect-ratio: 4/3; } /* Taller images on mobile */
+            .hero-name { font-size: 3.5rem; -webkit-text-stroke: 0; color: #fff; } /* Solid white on mobile for readability */
+            .skill-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .skill-desc { text-align: left; }
+            .project-title { font-size: 1.5rem; }
+            .dock-nav { bottom: 20px; padding: 12px 25px; gap: 25px; width: 85%; justify-content: space-around; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-mesh"></div>
+    <div class="spotlight"></div>
+    <div class="grid-bg"></div>
 
-    <header>
-        <div class="logo">SATRIA<span>.</span></div>
-        <div class="hamburger" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-        <nav class="nav-links">
-            <a href="#hero">Home</a>
-            <a href="#expertise">Expertise</a>
-            <a href="#work">Selected Work</a>
-            <a href="https://instagram.com/username_anda" target="_blank" style="color:var(--accent)">Connect</a>
-        </nav>
-        <a href="https://instagram.com/username_anda" target="_blank" class="cta-small">DM Instagram</a>
-    </header>
+    <div class="social-corner" data-aos="fade-down">
+        <a href="https://instagram.com/username_anda" target="_blank" class="ig-btn">@SATRIA</a>
+    </div>
 
-    <section class="hero" id="hero">
-        <div data-aos="fade-up">
-            <div style="margin-bottom: 20px; color: var(--accent); font-weight: 600; letter-spacing: 1px; font-size: 0.9rem;">
-                • AVAILABLE FOR PROJECTS
+    <section class="hero" id="home">
+        <div data-aos="fade-up" data-aos-duration="1500">
+            <div class="role-label">
+                <div class="line"></div> DEVELOPMENT & VISUALS
             </div>
-            <h1>
-                <span class="gradient-text">Crafting Digital Impact</span><br>
-                With Precision.
-            </h1>
-            <p>
-                Spesialis Web Development & IT Hardware. <br>
-                Menggabungkan keandalan teknis dengan estetika desain modern.
+            <h1 class="hero-name">SATRIA.</h1>
+            <p class="hero-desc">
+                Saya tidak hanya membuat website atau memperbaiki hardware. Saya menciptakan <strong>sistem yang bekerja</strong> dan <strong>visual yang berbicara</strong>.
             </p>
-            <a href="https://instagram.com/username_anda" target="_blank" class="hero-btn">
-                <i class="fab fa-instagram"></i> Start a Project
-            </a>
         </div>
     </section>
 
-    <section class="section" id="expertise">
-        <div class="section-header" data-aos="fade-up">
-            <span>WHAT I DO</span>
-            <h2>My Expertise</h2>
+    <section class="skills-section" id="skills">
+        <div class="section-title">CAPABILITIES</div>
+        
+        <div class="skill-item" data-aos="fade-up">
+            <div class="skill-name">Fullstack Web</div>
+            <div class="skill-desc">React, HTML/CSS, Landing Pages, Web Apps</div>
         </div>
-
-        <div class="grid-3">
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <div class="card-icon"><i class="fas fa-code"></i></div>
-                <h3>Web Development</h3>
-                <p>Website performa tinggi, responsif, dan SEO-friendly. Dari landing page elegan hingga sistem aplikasi web yang kompleks.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="200">
-                <div class="card-icon"><i class="fas fa-server"></i></div>
-                <h3>Hardware Solutions</h3>
-                <p>Diagnosa mendalam, perbaikan PC/Laptop, dan optimasi sistem. Memastikan infrastruktur IT Anda berjalan tanpa hambatan.</p>
-            </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="300">
-                <div class="card-icon"><i class="fas fa-photo-video"></i></div>
-                <h3>Creative Visual</h3>
-                <p>Video editing sinematik dan desain konten visual yang menangkap perhatian audiens di platform digital.</p>
-            </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-name">Hardware Engineer</div>
+            <div class="skill-desc">PC Build, Troubleshooting, Network Logic</div>
+        </div>
+        <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-name">Visual Editor</div>
+            <div class="skill-desc">Cinematic Video, Color Grading, Retouching</div>
         </div>
     </section>
 
-    <section class="section" id="work">
-        <div class="section-header" data-aos="fade-up">
-            <span>PORTFOLIO</span>
-            <h2>Featured Projects</h2>
+    <section class="projects-section" id="works">
+        <div class="section-title">SELECTED WORKS</div>
+
+        <div class="project-block" data-aos="fade-up">
+            <a href="https://samik-coffe.vercel.app/" target="_blank">
+                <img src="img/coffe.png" class="project-image" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
+                <div class="project-meta">
+                    <div>
+                        <h2 class="project-title">SAMIK COFFEE</h2>
+                        <span class="project-tags">WEB DESIGN / F&B</span>
+                    </div>
+                    <div class="view-btn"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </a>
         </div>
 
-        <div class="grid-3">
-            <a href="https://samik-coffe.vercel.app/" target="_blank" class="project-card" data-aos="zoom-in">
-                <img src="img/coffe.png" class="project-img" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
-                <div class="project-overlay">
-                    <span class="badge">F&B</span>
-                    <h3>Samik Coffee</h3>
-                    <p>Modern coffee shop landing page.</p>
+        <div class="project-block" data-aos="fade-up">
+            <a href="https://samikstore-pos.vercel.app/" target="_blank">
+                <img src="img/kasir.png" class="project-image" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
+                <div class="project-meta">
+                    <div>
+                        <h2 class="project-title">POS SYSTEM</h2>
+                        <span class="project-tags">WEB APP / LOGIC</span>
+                    </div>
+                    <div class="view-btn"><i class="fas fa-arrow-right"></i></div>
                 </div>
             </a>
+        </div>
 
-            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                <img src="img/kasir.png" class="project-img" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
-                <div class="project-overlay">
-                    <span class="badge">WEB APP</span>
-                    <h3>POS System</h3>
-                    <p>Management system for retail.</p>
-                </div>
-            </a>
-
-            <a href="https://samik-showrm.vercel.app/" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="200">
-                <img src="img/showroom.png" class="project-img" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
-                <div class="project-overlay">
-                    <span class="badge">CATALOG</span>
-                    <h3>Auto Gallery</h3>
-                    <p>Premium vehicle showcase.</p>
+        <div class="project-block" data-aos="fade-up">
+            <a href="https://samik-showrm.vercel.app/" target="_blank">
+                <img src="img/showroom.png" class="project-image" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
+                <div class="project-meta">
+                    <div>
+                        <h2 class="project-title">AUTO GALLERY</h2>
+                        <span class="project-tags">CATALOG / INTERACTIVE</span>
+                    </div>
+                    <div class="view-btn"><i class="fas fa-arrow-right"></i></div>
                 </div>
             </a>
         </div>
     </section>
 
-    <footer data-aos="fade-in">
-        <div class="footer-cta">
-            <h2>Have an idea?</h2>
-            <p style="color:var(--text-muted); margin-bottom: 30px;">Let's build something amazing together.</p>
-            
-            <div style="margin-bottom: 40px;">
-                <a href="https://instagram.com/username_anda" target="_blank" class="hero-btn" style="background: transparent; border: 1px solid white; color: white;">
-                    DM on Instagram
-                </a>
-            </div>
-
-            <div>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-            </div>
-            
-            <p style="margin-top: 50px; font-size: 0.8rem; color: #555;">&copy; 2024 Satria. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <nav class="dock-nav">
+        <a href="#home" class="dock-item active"><i class="fas fa-home"></i></a>
+        <a href="#skills" class="dock-item"><i class="fas fa-layer-group"></i></a>
+        <a href="#works" class="dock-item"><i class="fas fa-eye"></i></a>
+        <a href="https://instagram.com/username_anda" target="_blank" class="dock-item"><i class="fab fa-instagram"></i></a>
+    </nav>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
 
-        function toggleMenu() {
-            const nav = document.querySelector('.nav-links');
-            const icon = document.querySelector('.hamburger i');
-            nav.classList.toggle('active');
-            
-            if(nav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        }
+        // Active State untuk Dock Nav
+        const sections = document.querySelectorAll('section');
+        const navLi = document.querySelectorAll('.dock-nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLi.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
