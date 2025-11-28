@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Digital Craftsman</title>
+    <title>Satria | Digital Systems & Visuals</title>
+    <meta name="description" content="Portfolio Satria - Web Developer, Hardware Technician, Visual Artist.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #030303;
+            --bg: #050505;
             --text: #e0e0e0;
-            --accent: #fff; /* Monochrome style untuk kesan mahal */
-            --highlight: #00f0ff; /* Cyber Cyan tipis untuk detil */
+            --accent: #fff;
+            --cyan: #00f0ff;
+            --pink: #ff00c1;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
@@ -27,213 +29,319 @@
             color: var(--text);
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 100px; /* Space for bottom nav */
+            padding-bottom: 120px; /* Space for dock */
         }
 
-        /* --- SPOTLIGHT EFFECT (Background Mewah) --- */
+        /* --- 1. BOOT SCREEN (Preloader) --- */
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 99999;
+            padding: 40px; font-family: 'Courier New', monospace; color: #0f0;
+            display: flex; flex-direction: column; justify-content: flex-start;
+        }
+        .terminal-line { margin-bottom: 5px; font-size: 14px; opacity: 0.8; }
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        /* --- 2. BACKGROUND & LAYOUT --- */
         .spotlight {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            background: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(5, 5, 5, 1) 100%);
             z-index: -2;
         }
-        
-        /* Grid halus biar techy */
         .grid-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1; pointer-events: none;
+            background-size: 40px 40px; z-index: -1; pointer-events: none;
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
         a { text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
+        h1, h2 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- HERO (Personal Branding Kuat) --- */
+        /* --- 3. HERO & GLITCH EFFECT --- */
         .hero {
             min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
-            padding: 0 8%; position: relative;
+            padding: 0 8%;
         }
-        
-        .role-label {
-            font-size: 0.9rem; color: var(--highlight); margin-bottom: 20px;
+        .label {
+            font-size: 0.8rem; color: var(--cyan); margin-bottom: 1rem; letter-spacing: 2px;
             display: flex; align-items: center; gap: 10px;
         }
-        .line { width: 40px; height: 1px; background: var(--highlight); }
+        .label::before { content: ''; width: 30px; height: 1px; background: var(--cyan); }
 
-        .hero-name {
-            font-size: clamp(3rem, 12vw, 9rem);
-            font-weight: 700; line-height: 0.9; color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.5); /* Outline Text Effect */
+        .glitch-wrapper { position: relative; display: inline-block; }
+        .hero-title {
+            font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 700; color: #fff;
+            position: relative; line-height: 0.9;
+        }
+        
+        /* Glitch Animation CSS */
+        .hero-title::before, .hero-title::after {
+            content: "SATRIA."; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+        }
+        .hero-title::before {
+            color: var(--pink); z-index: -1;
+            animation: glitch-1 3s infinite linear alternate-reverse;
+        }
+        .hero-title::after {
+            color: var(--cyan); z-index: -2;
+            animation: glitch-2 2.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-1 {
+            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
+            100% { clip-path: inset(10% 0 50% 0); transform: translate(-2px, 2px); }
+        }
+        @keyframes glitch-2 {
+            0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -2px); }
+            20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
+            100% { clip-path: inset(30% 0 20% 0); transform: translate(2px, 1px); }
+        }
+
+        .hero-desc {
+            max-width: 500px; margin-top: 40px; font-size: 1.1rem; color: #888;
+            border-left: 1px solid #333; padding-left: 20px;
+        }
+
+        /* --- 4. SKILLS --- */
+        .skills { padding: 80px 8%; }
+        .section-header { font-size: 0.9rem; color: #555; border-bottom: 1px solid #222; padding-bottom: 15px; margin-bottom: 40px; display: flex; justify-content: space-between; }
+        
+        .skill-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 30px 0; border-bottom: 1px solid #111; transition: 0.3s;
+        }
+        .skill-row:hover { padding-left: 20px; border-bottom-color: var(--accent); }
+        .skill-title { font-size: 1.5rem; font-weight: 500; }
+        .skill-detail { font-size: 0.9rem; color: #666; text-align: right; }
+
+        /* --- 5. PROJECTS (3D Tilt) --- */
+        .projects { padding: 50px 8%; }
+        .project-item { margin-bottom: 120px; perspective: 1000px; /* For 3D */ }
+        
+        .project-card {
+            width: 100%; transition: transform 0.1s; /* Smooth movement handled by JS */
+            transform-style: preserve-3d;
+        }
+        .project-img-container {
+            width: 100%; border-radius: 4px; overflow: hidden; position: relative;
+        }
+        .project-img {
+            width: 100%; display: block; filter: grayscale(100%) contrast(1.2);
             transition: 0.5s;
         }
-        .hero-name:hover { -webkit-text-stroke: 1px #fff; text-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        .project-item:hover .project-img { filter: grayscale(0%); transform: scale(1.02); }
         
-        .hero-desc {
-            font-size: 1.2rem; max-width: 500px; margin-top: 30px; color: #888;
-            border-left: 2px solid var(--highlight); padding-left: 20px;
+        .project-info {
+            display: flex; justify-content: space-between; align-items: flex-end; margin-top: 25px;
+            transform: translateZ(20px); /* Teks melayang sedikit */
         }
+        .project-name { font-size: 2rem; margin-bottom: 5px; }
+        .project-tags { font-size: 0.8rem; color: var(--cyan); letter-spacing: 1px; }
+        .arrow-icon { font-size: 2.5rem; transform: rotate(-45deg); transition: 0.3s; }
+        .project-item:hover .arrow-icon { transform: rotate(0) translateX(10px); color: var(--cyan); }
 
-        /* --- SKILLS (List Style - Bukan Kartu Jualan) --- */
-        .skills-section { padding: 50px 8%; }
-        .section-title { font-size: 1rem; color: #666; margin-bottom: 40px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        
-        .skill-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 25px 0; border-bottom: 1px solid #1a1a1a; transition: 0.3s;
-        }
-        .skill-item:hover { padding-left: 20px; border-bottom: 1px solid var(--highlight); }
-        .skill-name { font-size: 1.5rem; font-weight: 600; }
-        .skill-desc { font-size: 0.9rem; color: #666; text-align: right; }
-
-        /* --- PROJECT SHOWCASE (Big & Bold) --- */
-        .projects-section { padding: 100px 8%; }
-        
-        .project-block {
-            margin-bottom: 120px; position: relative;
-        }
-        .project-image {
-            width: 100%; height: auto; border-radius: 4px; filter: grayscale(100%) contrast(1.1);
-            transition: 0.5s; cursor: pointer;
-        }
-        .project-block:hover .project-image { filter: grayscale(0%); }
-        
-        .project-meta {
-            display: flex; justify-content: space-between; align-items: flex-end; margin-top: 20px;
-        }
-        .project-title { font-size: 2rem; margin-bottom: 5px; }
-        .project-tags { font-size: 0.8rem; color: var(--highlight); font-family: 'Space Grotesk', sans-serif; letter-spacing: 1px; }
-        .view-btn { 
-            font-size: 3rem; transform: rotate(-45deg); transition: 0.3s;
-        }
-        .project-block:hover .view-btn { transform: rotate(0) translateX(10px); color: var(--highlight); }
-
-        /* --- FLOATING DOCK (Mobile Nav Kekinian) --- */
-        .dock-nav {
+        /* --- 6. FLOATING DOCK NAV --- */
+        .dock {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(10px);
-            padding: 15px 30px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
-            display: flex; gap: 30px; align-items: center; z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px);
+            padding: 15px 30px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; gap: 30px; align-items: center; z-index: 100;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-        .dock-item { font-size: 1.2rem; color: #888; transition: 0.3s; position: relative; }
-        .dock-item:hover, .dock-item.active { color: #fff; transform: translateY(-5px); }
-        .dock-item::after {
-            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
-            width: 0; height: 3px; background: var(--highlight); transition: 0.3s; border-radius: 2px;
+        .dock a { color: #888; font-size: 1.2rem; position: relative; transition: 0.3s; }
+        .dock a:hover, .dock a.active { color: #fff; transform: translateY(-3px); }
+        .dock a.active::after {
+            content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+            width: 5px; height: 5px; background: var(--cyan); border-radius: 50%;
         }
-        .dock-item.active::after { width: 20px; }
 
-        /* --- SOCIAL OVERLAY --- */
-        .social-corner { position: fixed; top: 40px; right: 8%; z-index: 100; mix-blend-mode: difference; }
-        .ig-btn { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid #fff; padding-bottom: 2px; }
+        /* --- 7. TOP CORNER IG --- */
+        .top-link { 
+            position: fixed; top: 40px; right: 8%; font-size: 0.8rem; font-weight: 700; 
+            z-index: 90; color: #fff; mix-blend-mode: exclusion;
+        }
+        .top-link:hover { color: var(--cyan); }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero-name { font-size: 3.5rem; -webkit-text-stroke: 0; color: #fff; } /* Solid white on mobile for readability */
-            .skill-item { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .skill-desc { text-align: left; }
-            .project-title { font-size: 1.5rem; }
-            .dock-nav { bottom: 20px; padding: 12px 25px; gap: 25px; width: 85%; justify-content: space-around; }
+            .hero-title { font-size: 3.5rem; }
+            .skill-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .skill-detail { text-align: left; }
+            .dock { bottom: 20px; width: 90%; justify-content: space-around; }
+            #boot-screen { padding: 20px; font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
+    <div id="boot-screen">
+        <div id="terminal"></div>
+        <div class="blink">_</div>
+    </div>
+
     <div class="spotlight"></div>
     <div class="grid-bg"></div>
 
-    <div class="social-corner" data-aos="fade-down">
-        <a href="https://instagram.com/username_anda" target="_blank" class="ig-btn">@SATRIA</a>
-    </div>
+    <a href="https://instagram.com/username_anda" target="_blank" class="top-link">@SATRIA_DEV</a>
 
     <section class="hero" id="home">
         <div data-aos="fade-up" data-aos-duration="1500">
-            <div class="role-label">
-                <div class="line"></div> DEVELOPMENT & VISUALS
+            <div class="label">SYSTEM ONLINE</div>
+            <div class="glitch-wrapper">
+                <h1 class="hero-title">SATRIA.</h1>
             </div>
-            <h1 class="hero-name">SATRIA.</h1>
             <p class="hero-desc">
-                Saya tidak hanya membuat website atau memperbaiki hardware. Saya menciptakan <strong>sistem yang bekerja</strong> dan <strong>visual yang berbicara</strong>.
+                Engineering digital experiences. <br>
+                Web Development • Hardware Logic • Visual Artistry.
             </p>
         </div>
     </section>
 
-    <section class="skills-section" id="skills">
-        <div class="section-title">CAPABILITIES</div>
+    <section class="skills" id="skills">
+        <div class="section-header">
+            <span>CORE CAPABILITIES</span>
+            <span>01</span>
+        </div>
         
-        <div class="skill-item" data-aos="fade-up">
-            <div class="skill-name">Fullstack Web</div>
-            <div class="skill-desc">React, HTML/CSS, Landing Pages, Web Apps</div>
+        <div class="skill-row" data-aos="fade-up">
+            <div class="skill-title">Fullstack Web</div>
+            <div class="skill-detail">React JS, Tailwind, Landing Pages, Web Apps</div>
         </div>
-        <div class="skill-item" data-aos="fade-up" data-aos-delay="100">
-            <div class="skill-name">Hardware Engineer</div>
-            <div class="skill-desc">PC Build, Troubleshooting, Network Logic</div>
+        <div class="skill-row" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-title">Hardware Tech</div>
+            <div class="skill-detail">PC Assembly, Troubleshooting, Network System</div>
         </div>
-        <div class="skill-item" data-aos="fade-up" data-aos-delay="200">
-            <div class="skill-name">Visual Editor</div>
-            <div class="skill-desc">Cinematic Video, Color Grading, Retouching</div>
+        <div class="skill-row" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-title">Visual Creative</div>
+            <div class="skill-detail">Cinematic Editing, Color Grading, UI Design</div>
         </div>
     </section>
 
-    <section class="projects-section" id="works">
-        <div class="section-title">SELECTED WORKS</div>
+    <section class="projects" id="works">
+        <div class="section-header">
+            <span>SELECTED WORKS</span>
+            <span>02</span>
+        </div>
 
-        <div class="project-block" data-aos="fade-up">
-            <a href="https://samik-coffe.vercel.app/" target="_blank">
-                <img src="img/coffe.png" class="project-image" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
-                <div class="project-meta">
+        <div class="project-item" data-aos="fade-up">
+            <a href="https://samik-coffe.vercel.app/" target="_blank" class="project-card">
+                <div class="project-img-container">
+                    <img src="img/coffe.png" class="project-img" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
+                </div>
+                <div class="project-info">
                     <div>
-                        <h2 class="project-title">SAMIK COFFEE</h2>
+                        <h2 class="project-name">Samik Coffee</h2>
                         <span class="project-tags">WEB DESIGN / F&B</span>
                     </div>
-                    <div class="view-btn"><i class="fas fa-arrow-right"></i></div>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
                 </div>
             </a>
         </div>
 
-        <div class="project-block" data-aos="fade-up">
-            <a href="https://samikstore-pos.vercel.app/" target="_blank">
-                <img src="img/kasir.png" class="project-image" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
-                <div class="project-meta">
+        <div class="project-item" data-aos="fade-up">
+            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="project-card">
+                <div class="project-img-container">
+                    <img src="img/kasir.png" class="project-img" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
+                </div>
+                <div class="project-info">
                     <div>
-                        <h2 class="project-title">POS SYSTEM</h2>
+                        <h2 class="project-name">POS System</h2>
                         <span class="project-tags">WEB APP / LOGIC</span>
                     </div>
-                    <div class="view-btn"><i class="fas fa-arrow-right"></i></div>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
                 </div>
             </a>
         </div>
 
-        <div class="project-block" data-aos="fade-up">
-            <a href="https://samik-showrm.vercel.app/" target="_blank">
-                <img src="img/showroom.png" class="project-image" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
-                <div class="project-meta">
+        <div class="project-item" data-aos="fade-up">
+            <a href="https://samik-showrm.vercel.app/" target="_blank" class="project-card">
+                <div class="project-img-container">
+                    <img src="img/showroom.png" class="project-img" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
+                </div>
+                <div class="project-info">
                     <div>
-                        <h2 class="project-title">AUTO GALLERY</h2>
+                        <h2 class="project-name">Auto Gallery</h2>
                         <span class="project-tags">CATALOG / INTERACTIVE</span>
                     </div>
-                    <div class="view-btn"><i class="fas fa-arrow-right"></i></div>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
                 </div>
             </a>
         </div>
     </section>
 
-    <nav class="dock-nav">
-        <a href="#home" class="dock-item active"><i class="fas fa-home"></i></a>
-        <a href="#skills" class="dock-item"><i class="fas fa-layer-group"></i></a>
-        <a href="#works" class="dock-item"><i class="fas fa-eye"></i></a>
-        <a href="https://instagram.com/username_anda" target="_blank" class="dock-item"><i class="fab fa-instagram"></i></a>
+    <nav class="dock">
+        <a href="#home" class="active"><i class="fas fa-power-off"></i></a>
+        <a href="#skills"><i class="fas fa-layer-group"></i></a>
+        <a href="#works"><i class="fas fa-eye"></i></a>
+        <a href="https://instagram.com/username_anda" target="_blank"><i class="fab fa-instagram"></i></a>
     </nav>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // A. Init AOS Animation
         AOS.init({ duration: 1000, once: true });
 
-        // Active State untuk Dock Nav
+        // B. Boot Sequence Logic
+        const terminal = document.getElementById('terminal');
+        const bootScreen = document.getElementById('boot-screen');
+        const lines = [
+            "INITIALIZING SATRIA_SYSTEM...",
+            "LOADING KERNEL MODULES... OK",
+            "CHECKING MEMORY... 64GB OK",
+            "CONNECTING TO VISUAL INTERFACE...",
+            "ACCESS GRANTED.",
+            "WELCOME."
+        ];
+        
+        let lineIndex = 0;
+        
+        function typeLine() {
+            if (lineIndex < lines.length) {
+                const p = document.createElement('div');
+                p.className = 'terminal-line';
+                p.textContent = lines[lineIndex];
+                terminal.appendChild(p);
+                lineIndex++;
+                setTimeout(typeLine, Math.random() * 200 + 50); // Random speed typing
+            } else {
+                setTimeout(() => {
+                    bootScreen.style.transition = "opacity 0.8s ease";
+                    bootScreen.style.opacity = "0";
+                    setTimeout(() => bootScreen.remove(), 800);
+                }, 1000);
+            }
+        }
+        
+        window.onload = typeLine;
+
+        // C. 3D Tilt Effect Logic
+        const cards = document.querySelectorAll('.project-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / 20) * -1; // Reverse for natural feel
+                const rotateY = (x - centerX) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        // D. Active Nav Logic
         const sections = document.querySelectorAll('section');
-        const navLi = document.querySelectorAll('.dock-nav a');
+        const navLinks = document.querySelectorAll('.dock a');
 
         window.addEventListener('scroll', () => {
             let current = '';
@@ -245,7 +353,7 @@
                 }
             });
 
-            navLi.forEach(a => {
+            navLinks.forEach(a => {
                 a.classList.remove('active');
                 if (a.getAttribute('href').includes(current)) {
                     a.classList.add('active');
