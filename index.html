@@ -7,7 +7,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://samik.my.id/">
     <meta property="og:title" content="SATRIA | SYSTEM ONLINE">
-    <meta property="og:description" content="Visual Engineer & AI Integrator.">
+    <meta property="og:description" content="Visual Engineer, AI Integrator & Blockchain Dev.">
     <meta property="og:image" content="https://samik.my.id/img/thumbnail.jpg">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💠</text></svg>">
@@ -73,7 +73,7 @@
             border: 2px solid var(--primary);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
             margin-bottom: 30px;
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200'); /* GANTI FOTO ANDA */
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200');
             background-size: cover; background-position: center;
         }
         
@@ -163,9 +163,8 @@
         .embedded-badge:hover { transform: scale(1.05); filter: brightness(1.2); }
 
         /* --- 6. PROJECT FILTER & CARDS --- */
-        /* Filter Controls */
         .filter-container {
-            display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;
+            display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;
         }
         .filter-btn {
             background: transparent; border: 1px solid var(--border); color: var(--text-muted);
@@ -176,12 +175,10 @@
             border-color: var(--primary); color: var(--primary); background: rgba(0, 243, 255, 0.05);
         }
 
-        /* Project Card */
         .project-card {
             display: block; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; 
             text-decoration: none; background: var(--glass); overflow: hidden; transition: 0.4s;
         }
-        /* Class untuk Filter Logic */
         .project-card.show { display: block; animation: zoomIn 0.4s ease; }
         .project-card.hide { display: none; }
         @keyframes zoomIn { from {opacity:0; transform: scale(0.9);} to {opacity:1; transform: scale(1);} }
@@ -225,10 +222,7 @@
             .tab-container { min-width: 300px; }
             .content-section { width: 90%; max-width: 1000px; margin: 0 auto; }
             #capabilities { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-            
-            /* Grid khusus untuk database dengan filter agar tidak rusak */
             #database-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-            
             #capabilities.active { display: grid; }
             .expert-card { margin-bottom: 0; }
             .hero { min-height: 90vh; }
@@ -250,11 +244,11 @@
         
         <h1>
             I AM A <br>
-            <span class="txt-type" data-wait="2000" data-words='["WEB DEV & DESIGN", "AI INTEGRATOR", "HARDWARE TECH", "VISUAL CREATOR"]'></span>
+            <span class="txt-type" data-wait="2000" data-words='["WEB DEV & DESIGN", "AI INTEGRATOR", "BLOCKCHAIN DEV", "HARDWARE TECH"]'></span>
         </h1>
 
         <p class="hero-desc">
-            Menggabungkan presisi logika mesin, estetika visual, dan kecerdasan buatan. Menciptakan ekosistem digital yang tidak hanya fungsional dan estetik, tapi juga cerdas dan bertenaga.
+            Menggabungkan presisi logika mesin, estetika visual, serta inovasi AI dan Blockchain. Menciptakan ekosistem digital yang tidak hanya fungsional dan estetik, tapi juga cerdas, terdesentralisasi, dan bertenaga.
         </p>
         
         <div class="social-hub">
@@ -325,6 +319,26 @@
             </div>
         </div>
 
+        <div class="expert-card" data-aos="fade-up" data-aos-delay="150">
+            <div class="card-top">
+                <div class="expert-header">
+                    <div class="expert-title"><i class="fas fa-link"></i> Blockchain Dev</div>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <p class="expert-desc">Pengembangan Smart Contract, DApps, dan integrasi Web3 yang aman.</p>
+            </div>
+            <div class="card-divider"></div>
+            <div class="card-bottom">
+                <div class="stack-label">// CHAIN_STACK:</div>
+                <div class="embedded-stack">
+                    <img src="https://img.shields.io/badge/Solidity-363636?style=flat-square&logo=solidity&logoColor=white" class="embedded-badge">
+                    <img src="https://img.shields.io/badge/Ethereum-3C3C3D?style=flat-square&logo=ethereum&logoColor=white" class="embedded-badge">
+                    <img src="https://img.shields.io/badge/Web3.js-F16822?style=flat-square&logo=web3.js&logoColor=white" class="embedded-badge">
+                    <img src="https://img.shields.io/badge/Polygon-7B3FE4?style=flat-square&logo=polygon&logoColor=white" class="embedded-badge">
+                </div>
+            </div>
+        </div>
+
         <div class="expert-card" data-aos="fade-up" data-aos-delay="200">
             <div class="card-top">
                 <div class="expert-header">
@@ -377,6 +391,7 @@
             <button class="filter-btn active" onclick="filterSelection('all')">ALL</button>
             <button class="filter-btn" onclick="filterSelection('web')">WEB</button>
             <button class="filter-btn" onclick="filterSelection('ai')">AI</button>
+            <button class="filter-btn" onclick="filterSelection('blockchain')">CHAIN</button>
         </div>
 
         <div id="database-grid">
@@ -433,6 +448,17 @@
                 <div class="p-info">
                     <div class="p-title">Data Analysis</div>
                     <div class="p-meta">PANDAS // INSIGHTS</div>
+                </div>
+            </a>
+
+            <a href="#" class="project-card blockchain">
+                <div class="p-img-box">
+                    <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1000" class="p-img">
+                    <div class="p-icon"><i class="fas fa-cubes"></i></div>
+                </div>
+                <div class="p-info">
+                    <div class="p-title">NFT Marketplace</div>
+                    <div class="p-meta">SOLIDITY // WEB3</div>
                 </div>
             </a>
 
@@ -504,7 +530,7 @@
             }
             
             var target = document.getElementById(tabName);
-            target.style.display = "block"; // Default block
+            target.style.display = "block"; 
 
             setTimeout(() => { target.classList.add("active"); }, 10);
             event.currentTarget.className += " active";
