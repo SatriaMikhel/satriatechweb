@@ -3,363 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Digital Systems & Visuals</title>
-    <meta name="description" content="Portfolio Satria - Web Developer, Hardware Technician, Visual Artist.">
+    <title>SATRIA | SYSTEM ONLINE</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #050505;
-            --text: #e0e0e0;
-            --accent: #fff;
-            --cyan: #00f0ff;
-            --pink: #ff00c1;
+            --bg: #020408;
+            --primary: #00f3ff; /* Electric Cyan */
+            --secondary: #0066ff; /* Deep Blue */
+            --glass: rgba(0, 243, 255, 0.05);
+            --border: rgba(0, 243, 255, 0.3);
+            --text: #e0f7fa;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Hide default cursor */ }
 
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
-            padding-bottom: 120px; /* Space for dock */
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        /* --- 1. BOOT SCREEN (Preloader) --- */
-        #boot-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 99999;
-            padding: 40px; font-family: 'Courier New', monospace; color: #0f0;
-            display: flex; flex-direction: column; justify-content: flex-start;
+        /* --- 1. HUD CURSOR (Target Bidik) --- */
+        .cursor-crosshair {
+            position: fixed; width: 30px; height: 30px;
+            border: 1px solid var(--primary); border-radius: 50%;
+            transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
+            transition: width 0.2s, height 0.2s;
+            mix-blend-mode: difference;
         }
-        .terminal-line { margin-bottom: 5px; font-size: 14px; opacity: 0.8; }
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-
-        /* --- 2. BACKGROUND & LAYOUT --- */
-        .spotlight {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(5, 5, 5, 1) 100%);
-            z-index: -2;
+        .cursor-dot {
+            position: fixed; width: 4px; height: 4px; background: var(--primary);
+            border-radius: 50%; transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999;
         }
-        .grid-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px; z-index: -1; pointer-events: none;
+        /* Hover Effect */
+        body:hover .cursor-crosshair { opacity: 1; }
+        a:hover ~ .cursor-crosshair, .project-card:hover ~ .cursor-crosshair {
+            width: 50px; height: 50px; background: rgba(0, 243, 255, 0.1); border-style: dashed;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
-        h1, h2 { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        /* --- 2. DECORATIVE HUD ELEMENTS --- */
+        .scan-line {
+            position: fixed; top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+            opacity: 0.5; animation: scan 4s linear infinite; z-index: 0; pointer-events: none;
+        }
+        @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
 
-        /* --- 3. HERO & GLITCH EFFECT --- */
+        .hud-corner {
+            position: fixed; width: 100px; height: 100px; border: 2px solid var(--border);
+            z-index: 50; pointer-events: none; opacity: 0.5;
+        }
+        .top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        .system-stats {
+            position: fixed; bottom: 30px; left: 40px; font-family: 'Share Tech Mono', monospace;
+            color: var(--primary); font-size: 12px; z-index: 50; display: flex; gap: 20px;
+        }
+
+        /* --- 3. HEADER --- */
+        header {
+            position: fixed; top: 0; width: 100%; padding: 30px 50px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            background: linear-gradient(to bottom, #020408 0%, transparent 100%);
+        }
+        .logo { 
+            font-size: 24px; font-weight: 700; letter-spacing: 3px; 
+            text-shadow: 0 0 10px var(--primary);
+        }
+        .status-badge {
+            font-family: 'Share Tech Mono', monospace; font-size: 12px;
+            padding: 5px 15px; border: 1px solid var(--primary); color: var(--primary);
+            text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0,243,255,0.2);
+        }
+
+        /* --- 4. HERO SECTION --- */
         .hero {
-            min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
-            padding: 0 8%;
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 0 10%; position: relative;
         }
-        .label {
-            font-size: 0.8rem; color: var(--cyan); margin-bottom: 1rem; letter-spacing: 2px;
-            display: flex; align-items: center; gap: 10px;
+        .hero-subtitle {
+            font-family: 'Share Tech Mono', monospace; color: var(--primary);
+            margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
         }
-        .label::before { content: ''; width: 30px; height: 1px; background: var(--cyan); }
-
-        .glitch-wrapper { position: relative; display: inline-block; }
-        .hero-title {
-            font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 700; color: #fff;
-            position: relative; line-height: 0.9;
+        .hero-subtitle::before { content: ''; width: 20px; height: 2px; background: var(--primary); }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem); line-height: 0.9; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         
-        /* Glitch Animation CSS */
-        .hero-title::before, .hero-title::after {
-            content: "SATRIA."; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
-        }
-        .hero-title::before {
-            color: var(--pink); z-index: -1;
-            animation: glitch-1 3s infinite linear alternate-reverse;
-        }
-        .hero-title::after {
-            color: var(--cyan); z-index: -2;
-            animation: glitch-2 2.5s infinite linear alternate-reverse;
-        }
-        @keyframes glitch-1 {
-            0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
-            20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
-            100% { clip-path: inset(10% 0 50% 0); transform: translate(-2px, 2px); }
-        }
-        @keyframes glitch-2 {
-            0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -2px); }
-            20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
-            100% { clip-path: inset(30% 0 20% 0); transform: translate(2px, 1px); }
-        }
-
         .hero-desc {
-            max-width: 500px; margin-top: 40px; font-size: 1.1rem; color: #888;
-            border-left: 1px solid #333; padding-left: 20px;
+            max-width: 600px; font-size: 1.2rem; color: #aab; line-height: 1.6;
+            border-left: 2px solid var(--secondary); padding-left: 20px;
         }
 
-        /* --- 4. SKILLS --- */
-        .skills { padding: 80px 8%; }
-        .section-header { font-size: 0.9rem; color: #555; border-bottom: 1px solid #222; padding-bottom: 15px; margin-bottom: 40px; display: flex; justify-content: space-between; }
-        
-        .skill-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 30px 0; border-bottom: 1px solid #111; transition: 0.3s;
-        }
-        .skill-row:hover { padding-left: 20px; border-bottom-color: var(--accent); }
-        .skill-title { font-size: 1.5rem; font-weight: 500; }
-        .skill-detail { font-size: 0.9rem; color: #666; text-align: right; }
-
-        /* --- 5. PROJECTS (3D Tilt) --- */
-        .projects { padding: 50px 8%; }
-        .project-item { margin-bottom: 120px; perspective: 1000px; /* For 3D */ }
-        
-        .project-card {
-            width: 100%; transition: transform 0.1s; /* Smooth movement handled by JS */
-            transform-style: preserve-3d;
-        }
-        .project-img-container {
-            width: 100%; border-radius: 4px; overflow: hidden; position: relative;
-        }
-        .project-img {
-            width: 100%; display: block; filter: grayscale(100%) contrast(1.2);
-            transition: 0.5s;
-        }
-        .project-item:hover .project-img { filter: grayscale(0%); transform: scale(1.02); }
-        
-        .project-info {
-            display: flex; justify-content: space-between; align-items: flex-end; margin-top: 25px;
-            transform: translateZ(20px); /* Teks melayang sedikit */
-        }
-        .project-name { font-size: 2rem; margin-bottom: 5px; }
-        .project-tags { font-size: 0.8rem; color: var(--cyan); letter-spacing: 1px; }
-        .arrow-icon { font-size: 2.5rem; transform: rotate(-45deg); transition: 0.3s; }
-        .project-item:hover .arrow-icon { transform: rotate(0) translateX(10px); color: var(--cyan); }
-
-        /* --- 6. FLOATING DOCK NAV --- */
-        .dock {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px);
-            padding: 15px 30px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.1);
-            display: flex; gap: 30px; align-items: center; z-index: 100;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-        .dock a { color: #888; font-size: 1.2rem; position: relative; transition: 0.3s; }
-        .dock a:hover, .dock a.active { color: #fff; transform: translateY(-3px); }
-        .dock a.active::after {
-            content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
-            width: 5px; height: 5px; background: var(--cyan); border-radius: 50%;
+        /* --- 5. HOLOGRAPHIC CARDS (Skills & Projects) --- */
+        section { padding: 100px 10%; }
+        .section-title {
+            font-size: 1.5rem; color: var(--primary); margin-bottom: 50px;
+            border-bottom: 1px solid var(--border); padding-bottom: 10px;
+            display: inline-block; font-family: 'Share Tech Mono', monospace;
         }
 
-        /* --- 7. TOP CORNER IG --- */
-        .top-link { 
-            position: fixed; top: 40px; right: 8%; font-size: 0.8rem; font-weight: 700; 
-            z-index: 90; color: #fff; mix-blend-mode: exclusion;
+        .grid-container {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
         }
-        .top-link:hover { color: var(--cyan); }
 
-        /* --- RESPONSIVE --- */
+        .holo-card {
+            background: rgba(2, 10, 20, 0.6); border: 1px solid var(--border);
+            padding: 10px; position: relative; transition: 0.3s;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+        }
+        .holo-card:hover { 
+            background: rgba(0, 243, 255, 0.05); border-color: var(--primary); 
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1); transform: translateY(-5px);
+        }
+
+        .card-img-box {
+            width: 100%; height: 200px; overflow: hidden; position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        .card-img {
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) cyan(1);
+            transition: 0.5s; opacity: 0.8;
+        }
+        .holo-card:hover .card-img { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+
+        .card-content { padding: 20px 10px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .card-tech { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--primary); }
+
+        /* Skill Bars HUD */
+        .skill-hud { margin-bottom: 20px; }
+        .skill-name { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; }
+        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); }
+        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: 1s ease-out; box-shadow: 0 0 10px var(--primary); }
+
+        /* --- 6. CTA BUTTON --- */
+        .cta-btn {
+            display: inline-block; padding: 15px 40px; 
+            border: 1px solid var(--primary); color: var(--primary);
+            font-family: 'Share Tech Mono', monospace; text-transform: uppercase;
+            letter-spacing: 2px; position: relative; overflow: hidden; margin-top: 40px;
+            background: transparent; transition: 0.3s;
+        }
+        .cta-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--primary); transition: 0.5s; z-index: -1;
+        }
+        .cta-btn:hover::before { left: 0; }
+        .cta-btn:hover { color: black; box-shadow: 0 0 20px var(--primary); }
+
+        /* --- 7. RESPONSIVE --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem; }
-            .skill-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .skill-detail { text-align: left; }
-            .dock { bottom: 20px; width: 90%; justify-content: space-around; }
-            #boot-screen { padding: 20px; font-size: 12px; }
+            .cursor-crosshair, .cursor-dot { display: none; } /* Matikan cursor di HP */
+            .hud-corner { width: 50px; height: 50px; }
+            header { padding: 20px; }
+            .hero h1 { font-size: 3rem; }
+            .system-stats { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div id="boot-screen">
-        <div id="terminal"></div>
-        <div class="blink">_</div>
+    <div class="cursor-crosshair"></div>
+    <div class="cursor-dot"></div>
+    <div class="scan-line"></div>
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner bottom-right"></div>
+
+    <div class="system-stats">
+        <div>CPU: <span id="cpu">12</span>%</div>
+        <div>RAM: <span id="ram">4.2</span>GB</div>
+        <div>NET: ONLINE</div>
     </div>
 
-    <div class="spotlight"></div>
-    <div class="grid-bg"></div>
+    <header data-aos="fade-down">
+        <div class="logo">SATRIA<span style="color:var(--primary)">.DEV</span></div>
+        <div class="status-badge">● SYSTEM READY</div>
+    </header>
 
-    <a href="https://instagram.com/username_anda" target="_blank" class="top-link">@SATRIA_DEV</a>
-
-    <section class="hero" id="home">
-        <div data-aos="fade-up" data-aos-duration="1500">
-            <div class="label">SYSTEM ONLINE</div>
-            <div class="glitch-wrapper">
-                <h1 class="hero-title">SATRIA.</h1>
-            </div>
+    <section class="hero">
+        <div data-aos="fade-right">
+            <div class="hero-subtitle">INITIALIZING PORTFOLIO PROTOCOL</div>
+            <h1>VISUAL<br>ENGINEER</h1>
             <p class="hero-desc">
-                Engineering digital experiences. <br>
-                Web Development • Hardware Logic • Visual Artistry.
+                Menggabungkan logika hardware presisi dengan estetika visual digital.
+                Spesialis dalam Web Development, Diagnosa Sistem, dan Creative Editing.
             </p>
+            <a href="https://instagram.com/username_anda" target="_blank" class="cta-btn">
+                [ ACCESS TERMINAL ]
+            </a>
         </div>
     </section>
 
-    <section class="skills" id="skills">
-        <div class="section-header">
-            <span>CORE CAPABILITIES</span>
-            <span>01</span>
+    <section>
+        <div class="section-title" data-aos="fade-right">// SKILL_MODULES_LOADED</div>
+        <div class="grid-container">
+            <div class="skill-hud" data-aos="fade-up">
+                <div class="skill-name">WEB DEVELOPMENT <span style="color:var(--primary)">95%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+            </div>
+            <div class="skill-hud" data-aos="fade-up" data-aos-delay="100">
+                <div class="skill-name">HARDWARE DIAGNOSTIC <span style="color:var(--primary)">98%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 98%"></div></div>
+            </div>
+            <div class="skill-hud" data-aos="fade-up" data-aos-delay="200">
+                <div class="skill-name">VISUAL EDITING <span style="color:var(--primary)">88%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 88%"></div></div>
+            </div>
         </div>
+    </section>
+
+    <section>
+        <div class="section-title" data-aos="fade-right">// PROJECT_DATABASE</div>
         
-        <div class="skill-row" data-aos="fade-up">
-            <div class="skill-title">Fullstack Web</div>
-            <div class="skill-detail">React JS, Tailwind, Landing Pages, Web Apps</div>
-        </div>
-        <div class="skill-row" data-aos="fade-up" data-aos-delay="100">
-            <div class="skill-title">Hardware Tech</div>
-            <div class="skill-detail">PC Assembly, Troubleshooting, Network System</div>
-        </div>
-        <div class="skill-row" data-aos="fade-up" data-aos-delay="200">
-            <div class="skill-title">Visual Creative</div>
-            <div class="skill-detail">Cinematic Editing, Color Grading, UI Design</div>
-        </div>
-    </section>
-
-    <section class="projects" id="works">
-        <div class="section-header">
-            <span>SELECTED WORKS</span>
-            <span>02</span>
-        </div>
-
-        <div class="project-item" data-aos="fade-up">
-            <a href="https://samik-coffe.vercel.app/" target="_blank" class="project-card">
-                <div class="project-img-container">
-                    <img src="img/coffe.png" class="project-img" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
+        <div class="grid-container">
+            <a href="https://samik-coffe.vercel.app/" target="_blank" class="holo-card" data-aos="zoom-in">
+                <div class="card-img-box">
+                    <img src="img/coffe.png" class="card-img" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
                 </div>
-                <div class="project-info">
-                    <div>
-                        <h2 class="project-name">Samik Coffee</h2>
-                        <span class="project-tags">WEB DESIGN / F&B</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
+                <div class="card-content">
+                    <div class="card-title">Samik Coffee</div>
+                    <div class="card-tech">HTML5 • CSS3 • ANIMATION</div>
                 </div>
             </a>
-        </div>
 
-        <div class="project-item" data-aos="fade-up">
-            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="project-card">
-                <div class="project-img-container">
-                    <img src="img/kasir.png" class="project-img" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
+            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="holo-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card-img-box">
+                    <img src="img/kasir.png" class="card-img" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
                 </div>
-                <div class="project-info">
-                    <div>
-                        <h2 class="project-name">POS System</h2>
-                        <span class="project-tags">WEB APP / LOGIC</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
+                <div class="card-content">
+                    <div class="card-title">POS System</div>
+                    <div class="card-tech">REACT • DATABASE • LOGIC</div>
                 </div>
             </a>
-        </div>
 
-        <div class="project-item" data-aos="fade-up">
-            <a href="https://samik-showrm.vercel.app/" target="_blank" class="project-card">
-                <div class="project-img-container">
-                    <img src="img/showroom.png" class="project-img" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
+            <a href="https://samik-showrm.vercel.app/" target="_blank" class="holo-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card-img-box">
+                    <img src="img/showroom.png" class="card-img" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
                 </div>
-                <div class="project-info">
-                    <div>
-                        <h2 class="project-name">Auto Gallery</h2>
-                        <span class="project-tags">CATALOG / INTERACTIVE</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
+                <div class="card-content">
+                    <div class="card-title">Auto Gallery</div>
+                    <div class="card-tech">BOOTSTRAP • JS • INTERACTIVE</div>
                 </div>
             </a>
         </div>
     </section>
 
-    <nav class="dock">
-        <a href="#home" class="active"><i class="fas fa-power-off"></i></a>
-        <a href="#skills"><i class="fas fa-layer-group"></i></a>
-        <a href="#works"><i class="fas fa-eye"></i></a>
-        <a href="https://instagram.com/username_anda" target="_blank"><i class="fab fa-instagram"></i></a>
-    </nav>
+    <footer style="text-align: center; padding: 50px; border-top: 1px solid var(--border); margin-top: 50px;">
+        <div style="font-family: 'Share Tech Mono'; color: var(--text); opacity: 0.5; font-size: 12px;">
+            SYSTEM TERMINATED. COPYRIGHT 2024 SATRIA.
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // A. Init AOS Animation
-        AOS.init({ duration: 1000, once: true });
+        // Init AOS
+        AOS.init({ duration: 800, once: true });
 
-        // B. Boot Sequence Logic
-        const terminal = document.getElementById('terminal');
-        const bootScreen = document.getElementById('boot-screen');
-        const lines = [
-            "INITIALIZING SATRIA_SYSTEM...",
-            "LOADING KERNEL MODULES... OK",
-            "CHECKING MEMORY... 64GB OK",
-            "CONNECTING TO VISUAL INTERFACE...",
-            "ACCESS GRANTED.",
-            "WELCOME."
-        ];
-        
-        let lineIndex = 0;
-        
-        function typeLine() {
-            if (lineIndex < lines.length) {
-                const p = document.createElement('div');
-                p.className = 'terminal-line';
-                p.textContent = lines[lineIndex];
-                terminal.appendChild(p);
-                lineIndex++;
-                setTimeout(typeLine, Math.random() * 200 + 50); // Random speed typing
-            } else {
-                setTimeout(() => {
-                    bootScreen.style.transition = "opacity 0.8s ease";
-                    bootScreen.style.opacity = "0";
-                    setTimeout(() => bootScreen.remove(), 800);
-                }, 1000);
-            }
-        }
-        
-        window.onload = typeLine;
+        // Custom Cursor Logic
+        const cursor = document.querySelector('.cursor-crosshair');
+        const dot = document.querySelector('.cursor-dot');
 
-        // C. 3D Tilt Effect Logic
-        const cards = document.querySelectorAll('.project-card');
-        
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = ((y - centerY) / 20) * -1; // Reverse for natural feel
-                const rotateY = (x - centerX) / 20;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            dot.style.left = e.clientX + 'px';
+            dot.style.top = e.clientY + 'px';
         });
 
-        // D. Active Nav Logic
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.dock a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
-        });
+        // Fake System Stats Randomizer
+        setInterval(() => {
+            document.getElementById('cpu').innerText = Math.floor(Math.random() * 30) + 10;
+            document.getElementById('ram').innerText = (Math.random() * 2 + 3).toFixed(1);
+        }, 1000);
     </script>
 </body>
 </html>
