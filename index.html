@@ -7,7 +7,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://samik.my.id/">
     <meta property="og:title" content="SATRIA | SYSTEM ONLINE">
-    <meta property="og:description" content="Visual Engineer, Hardware Specialist & AI Integrator.">
+    <meta property="og:description" content="Visual Engineer & Hardware Specialist. Web Dev, AI, & Creative.">
     <meta property="og:image" content="https://samik.my.id/img/thumbnail.jpg">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💠</text></svg>">
@@ -49,7 +49,7 @@
             line-height: 1.6;
         }
 
-        /* --- 2. BOOT SCREEN (Preloader) --- */
+        /* --- 2. BOOT SCREEN --- */
         #boot-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 99999;
@@ -60,7 +60,7 @@
         .blink-cursor { animation: blinker 1s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        /* --- 3. CUSTOM HUD CURSOR --- */
+        /* --- 3. CUSTOM CURSOR --- */
         .cursor-outer {
             position: fixed; width: 40px; height: 40px;
             border: 1px dashed var(--primary); border-radius: 50%;
@@ -78,7 +78,7 @@
             width: 60px; height: 60px; background: rgba(0, 243, 255, 0.1); border-style: solid;
         }
 
-        /* --- 4. DECORATIVE ELEMENTS (HUD) --- */
+        /* --- 4. HUD ELEMENTS --- */
         .scan-line {
             position: fixed; top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(to right, transparent, var(--primary), transparent);
@@ -105,9 +105,7 @@
             background: linear-gradient(to bottom, rgba(3,5,8,0.95) 0%, transparent 100%);
             backdrop-filter: blur(5px); border-bottom: 1px solid rgba(0, 243, 255, 0.05);
         }
-        .logo { 
-            font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-        }
+        .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
         .nav-menu { display: flex; gap: 30px; }
         .nav-link { 
             font-family: 'Share Tech Mono', monospace; font-size: 14px; color: var(--text-muted); 
@@ -139,32 +137,59 @@
         @keyframes blink { 50% { border-color: transparent; } }
 
         .hero-desc {
-            max-width: 700px; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px;
+            max-width: 700px; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px;
             border-left: 2px solid var(--border); padding-left: 20px;
             background: linear-gradient(90deg, rgba(0, 243, 255, 0.05), transparent);
         }
 
-        .cta-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 14px 35px; border: 1px solid var(--primary); color: var(--primary);
-            font-family: 'Share Tech Mono', monospace; text-transform: uppercase;
-            letter-spacing: 2px; font-size: 14px; background: rgba(0, 243, 255, 0.05);
-            transition: 0.3s; position: relative; overflow: hidden; width: fit-content;
+        /* LIVE STATUS */
+        .status-dot {
+            font-family: 'Share Tech Mono'; font-size: 0.9rem; color: #00ff00; 
+            display: flex; align-items: center; gap: 10px; margin-bottom: 40px;
         }
-        .cta-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(0, 243, 255, 0.4); }
+        .ping {
+            position: relative; display: flex; height: 10px; width: 10px;
+        }
+        .ping span:nth-child(1) {
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; position: absolute;
+            height: 100%; width: 100%; border-radius: 50%; background-color: #00ff00; opacity: 0.75;
+        }
+        .ping span:nth-child(2) {
+            position: relative; border-radius: 50%; height: 10px; width: 10px; background-color: #00ff00;
+        }
+        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
 
-        /* --- 7. GENERAL SECTION STYLE --- */
+        /* SOCIAL HUB (NEW BUTTONS) */
+        .social-hub {
+            display: flex; gap: 15px; flex-wrap: wrap;
+        }
+        .social-btn {
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: 0.3s;
+            background: rgba(0, 243, 255, 0.05);
+            /* Membuat sudut terpotong ala Sci-Fi */
+            clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
+        }
+        .social-btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* --- 7. GENERAL SECTIONS --- */
         section { padding: 80px 10%; }
         .section-header { margin-bottom: 50px; }
-        .section-title {
-            font-size: 2rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;
-        }
+        .section-title { font-size: 2rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .section-subtitle { font-family: 'Share Tech Mono'; color: var(--primary); font-size: 0.9rem; }
 
-        /* --- 8. SERVICES (Active Modules) --- */
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
-        }
+        /* --- 8. SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .service-card {
             background: var(--glass); border: 1px solid var(--border); padding: 30px;
             transition: 0.3s; position: relative; clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
@@ -174,7 +199,7 @@
         .service-card h3 { font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
         .service-card p { font-size: 0.95rem; color: var(--text-muted); }
 
-        /* --- 9. TECH STACK (Shields.io Badges) --- */
+        /* --- 9. TECH STACK --- */
         .stack-wrapper {
             background: rgba(2, 10, 20, 0.4); border: 1px solid var(--border); padding: 30px; position: relative;
         }
@@ -188,14 +213,9 @@
         }
         
         .stack-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; }
+        .tech-badge { height: 32px; transition: 0.3s; filter: grayscale(80%) opacity(0.7); cursor: none; }
+        .tech-badge:hover { filter: grayscale(0%) opacity(1); transform: scale(1.1) translateY(-3px); z-index: 10; }
         
-        .tech-badge {
-            height: 32px; transition: 0.3s; filter: grayscale(80%) opacity(0.7); cursor: none;
-        }
-        .tech-badge:hover {
-            filter: grayscale(0%) opacity(1); transform: scale(1.1) translateY(-3px); z-index: 10;
-        }
-
         .stack-category {
             font-family: 'Share Tech Mono'; color: var(--primary); font-size: 0.9rem;
             margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;
@@ -203,23 +223,16 @@
         }
         .stack-category:first-child { margin-top: 0; }
 
-        /* --- 10. PROJECTS (Database) --- */
+        /* --- 10. PROJECTS --- */
         .project-card {
             background: rgba(2, 10, 20, 0.6); border: 1px solid var(--border);
             padding: 10px; transition: 0.4s; position: relative; display: block;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%);
         }
         .project-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 0 20px rgba(0,243,255,0.1); }
-        
-        .card-img-wrap {
-            width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid var(--border);
-        }
-        .card-img {
-            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.1);
-            transition: 0.5s;
-        }
+        .card-img-wrap { width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid var(--border); }
+        .card-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.1); transition: 0.5s; }
         .project-card:hover .card-img { filter: grayscale(0%); transform: scale(1.05); }
-        
         .card-body { padding: 20px 10px; }
         .card-title { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: #fff; }
         .card-meta { font-family: 'Share Tech Mono'; font-size: 0.8rem; color: var(--primary); margin-top: 5px; }
@@ -235,7 +248,7 @@
 
         /* --- 12. RESPONSIVE --- */
         @media (max-width: 768px) {
-            .cursor-outer, .cursor-inner { display: none; } /* Hide Custom Cursor on Mobile */
+            .cursor-outer, .cursor-inner { display: none; }
             header { padding: 20px 5%; }
             .nav-menu { display: none; } 
             .logo { font-size: 1.2rem; }
@@ -253,6 +266,8 @@
         <div id="terminal"></div>
         <div class="blink-cursor">_</div>
     </div>
+
+    <canvas id="canvas-bg" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; opacity:0.3; pointer-events:none;"></canvas>
 
     <div class="cursor-outer"></div>
     <div class="cursor-inner"></div>
@@ -277,7 +292,7 @@
 
     <section class="hero">
         <div data-aos="fade-right">
-            <div class="hero-label">SYSTEM_INITIALIZED // V.4.0</div>
+            <div class="hero-label">SYSTEM_INITIALIZED // V.5.0</div>
             
             <h1>
                 I AM A <br>
@@ -288,9 +303,25 @@
                 Menggabungkan presisi logika mesin, estetika visual, dan kecerdasan buatan. Menciptakan ekosistem digital yang tidak hanya fungsional dan estetik, tapi juga cerdas dan bertenaga. Satu solusi adaptif untuk masa depan teknologi Anda.
             </p>
             
-            <a href="https://instagram.com/username_anda" target="_blank" class="cta-btn">
-                [ INITIATE CONTACT ]
-            </a>
+            <div class="status-dot">
+                <span class="ping"><span></span><span></span></span>
+                CURRENT STATUS: ACCEPTING NEW PROJECTS
+            </div>
+            
+            <div class="social-hub">
+                <a href="https://instagram.com/username_anda" target="_blank" class="social-btn" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/username_anda" target="_blank" class="social-btn" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/username_anda" target="_blank" class="social-btn" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://notion.so/username_anda" target="_blank" class="social-btn" title="Notion">
+                    <i class="fab fa-notion"></i> </a>
+            </div>
+
         </div>
     </section>
 
@@ -351,7 +382,6 @@
                 <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" class="tech-badge" alt="TensorFlow">
                 <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white" class="tech-badge" alt="OpenAI">
                 <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white" class="tech-badge" alt="Pandas">
-                <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" class="tech-badge" alt="NumPy">
 
                 <div class="stack-category">// TOOLS & DEPLOY</div>
                 <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" class="tech-badge" alt="Vercel">
@@ -416,7 +446,6 @@
                     <div class="card-meta">PYTHON / LLM / AUTOMATION</div>
                 </div>
             </a>
-
         </div>
     </section>
 
@@ -433,11 +462,11 @@
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // --- A. Boot Sequence (Loading) ---
+        // A. BOOT SEQUENCE
         const terminal = document.getElementById('terminal');
         const bootScreen = document.getElementById('boot-screen');
         const lines = [
-            "INITIALIZING SATRIA_SYSTEM V4.0...",
+            "INITIALIZING SATRIA_SYSTEM V5.0...",
             "LOADING KERNEL MODULES... OK",
             "CHECKING MEMORY... 64GB OK",
             "INTEGRATING AI CO-PROCESSOR...",
@@ -447,7 +476,6 @@
         ];
         
         let lineIndex = 0;
-        
         function typeBootLine() {
             if (lineIndex < lines.length) {
                 const p = document.createElement('div');
@@ -466,7 +494,7 @@
         }
         window.onload = typeBootLine;
 
-        // --- B. Custom Cursor Logic ---
+        // B. CUSTOM CURSOR
         const outer = document.querySelector('.cursor-outer');
         const inner = document.querySelector('.cursor-inner');
         document.addEventListener('mousemove', (e) => {
@@ -476,13 +504,13 @@
             inner.style.left = e.clientX + 'px';
         });
 
-        // --- C. Stats Simulation ---
+        // C. STATS SIMULATION
         setInterval(() => {
             document.getElementById('cpu').innerText = Math.floor(Math.random() * 40) + 10;
             document.getElementById('ram').innerText = (Math.random() * 4 + 2).toFixed(1);
         }, 2000);
 
-        // --- D. Typewriter Effect Logic ---
+        // D. TYPEWRITER
         class TypeWriter {
             constructor(txtElement, words, wait = 3000) {
                 this.txtElement = txtElement;
@@ -493,22 +521,17 @@
                 this.type();
                 this.isDeleting = false;
             }
-
             type() {
                 const current = this.wordIndex % this.words.length;
                 const fullTxt = this.words[current];
-
                 if(this.isDeleting) {
                     this.txt = fullTxt.substring(0, this.txt.length - 1);
                 } else {
                     this.txt = fullTxt.substring(0, this.txt.length + 1);
                 }
-
                 this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
-
                 let typeSpeed = 100;
                 if(this.isDeleting) { typeSpeed /= 2; }
-
                 if(!this.isDeleting && this.txt === fullTxt) {
                     typeSpeed = this.wait;
                     this.isDeleting = true;
@@ -517,11 +540,9 @@
                     this.wordIndex++;
                     typeSpeed = 500;
                 }
-
                 setTimeout(() => this.type(), typeSpeed);
             }
         }
-
         document.addEventListener('DOMContentLoaded', init);
         function init() {
             const txtElement = document.querySelector('.txt-type');
@@ -530,31 +551,67 @@
             new TypeWriter(txtElement, words, wait);
         }
 
-        // --- E. Audio Effect (Hover Sound) ---
+        // E. AUDIO EFFECT
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
         function playHoverSound() {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
-            
             oscillator.type = 'sine';
             oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime); 
             oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05);
-            
             gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
             gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-            
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
-            
             oscillator.start();
             oscillator.stop(audioCtx.currentTime + 0.05);
         }
-
         document.querySelectorAll('a, .service-card, .project-card, .tech-badge').forEach(el => {
             el.addEventListener('mouseenter', playHoverSound);
         });
+
+        // F. PARTICLES ANIMATION
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+        function initParticles() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 2 + 1,
+                    d: Math.random() * 50
+                });
+            }
+        }
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = '#00f3ff';
+            ctx.beginPath();
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                ctx.moveTo(p.x, p.y);
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+            }
+            ctx.fill();
+            updateParticles();
+        }
+        function updateParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                let p = particles[i];
+                p.y -= 0.5;
+                if (p.y < -10) { p.y = height + 10; p.x = Math.random() * width; }
+            }
+        }
+        setInterval(drawParticles, 33);
+        window.addEventListener('resize', initParticles);
+        initParticles();
     </script>
 </body>
 </html>
