@@ -3,431 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Satria | Tech Portfolio</title>
+    <meta name="description" content="Portfolio Satria - Web Developer & IT Technician. Melayani pembuatan website, servis hardware, dan editing kreatif.">
+    <meta name="author" content="Satria">
     
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Satria | Tech & Creative Portfolio</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- 1. MODERN VARIABLES --- */
+        /* --- 1. CORE VARIABLES --- */
         :root {
-            --bg-color: #050a10; 
-            --card-bg: rgba(20, 30, 48, 0.6);
-            --text-color: #e2e8f0;
-            --muted-color: #94a3b8;
-            --main-color: #00f2ea; /* Cyan Neon */
-            --accent-color: #7000ff; /* Purple Neon for gradient */
-            --border-glass: rgba(255, 255, 255, 0.05);
-            --shadow-glow: 0 0 20px rgba(0, 242, 234, 0.15);
-            --font-main: 'Outfit', sans-serif;
+            /* Background Deep Space */
+            --bg-dark: #0b0f19;
+            --bg-card: #111827;
+            
+            /* Typography */
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            
+            /* Accents */
+            --accent: #38bdf8; /* Sky Blue - Lebih profesional dari Neon Cyan */
+            --accent-glow: rgba(56, 189, 248, 0.2);
+            
+            /* Borders & Glass */
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --glass: rgba(17, 24, 39, 0.7);
+            
+            --font-main: 'Plus Jakarta Sans', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            background: var(--bg-color);
-            background-image: radial-gradient(circle at 10% 20%, rgba(0, 242, 234, 0.05) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(112, 0, 255, 0.05) 0%, transparent 20%);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08), transparent 25%);
+            color: var(--text-primary);
             font-family: var(--font-main);
-            overflow-x: hidden;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
         ul { list-style: none; }
+        img { max-width: 100%; display: block; }
 
-        /* Scroll Bar Custom */
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--main-color); }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* --- 2. HEADER --- */
+        /* --- 2. NAVBAR (Professional Glass) --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            padding: 20px 8%;
-            background: rgba(5, 10, 16, 0.8);
-            backdrop-filter: blur(15px);
+            padding: 1.2rem 8%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; border-bottom: 1px solid var(--border-glass);
-            transition: 0.3s;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .logo { 
-            font-size: 26px; font-weight: 800; letter-spacing: 1px; color: #fff;
-            position: relative;
+            font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 8px;
         }
-        .logo span { color: var(--main-color); }
+        .logo i { color: var(--accent); }
 
-        .navbar { display: flex; gap: 40px; }
+        .navbar { display: flex; gap: 2rem; }
         .navbar a {
-            font-size: 15px; color: var(--muted-color); font-weight: 500; position: relative;
+            font-size: 0.95rem; font-weight: 500; color: var(--text-secondary);
         }
-        .navbar a::after {
-            content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px;
-            background: var(--main-color); transition: 0.3s;
-        }
-        .navbar a:hover, .navbar a.active { color: #fff; }
-        .navbar a:hover::after, .navbar a.active::after { width: 100%; }
+        .navbar a:hover, .navbar a.active { color: var(--accent); }
 
-        #menu-icon { font-size: 24px; color: #fff; display: none; cursor: pointer; }
+        .btn-nav {
+            padding: 0.6rem 1.5rem; background: rgba(56, 189, 248, 0.1); 
+            color: var(--accent); border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        .btn-nav:hover { background: var(--accent); color: #000; }
+
+        #menu-icon { font-size: 1.5rem; color: white; display: none; cursor: pointer; }
 
         /* --- 3. HERO SECTION --- */
-        .home {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            text-align: center; padding: 150px 5% 100px; position: relative;
+        .hero {
+            min-height: 100vh; padding: 0 8%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative;
         }
 
-        /* Abstract Background Glow */
-        .glow-effect {
-            position: absolute; width: 400px; height: 400px; background: var(--main-color);
-            filter: blur(150px); opacity: 0.15; border-radius: 50%; z-index: -1;
-            top: 20%; left: 50%; transform: translateX(-50%);
-            animation: pulseGlow 5s infinite alternate;
-        }
-        @keyframes pulseGlow { 0% { opacity: 0.1; transform: translateX(-50%) scale(1); } 100% { opacity: 0.2; transform: translateX(-50%) scale(1.2); } }
+        .hero-content { max-width: 800px; z-index: 2; }
 
-        .home-content h1 { 
-            font-size: clamp(40px, 8vw, 75px); font-weight: 800; line-height: 1.1; margin-bottom: 15px; 
-            background: linear-gradient(135deg, #fff 0%, var(--muted-color) 100%);
+        .badge-status {
+            display: inline-block; padding: 6px 16px; 
+            background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 50px; color: var(--accent); font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800; margin-bottom: 1rem; line-height: 1.1;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #94a3b8);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+
+        .hero p {
+            font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2.5rem;
+            max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+
+        .btn-group { display: flex; gap: 1rem; justify-content: center; }
         
-        .typing-container {
-            font-size: clamp(18px, 4vw, 24px); font-weight: 600; color: var(--main-color); margin-bottom: 25px;
-            display: inline-block;
+        .btn-primary {
+            padding: 14px 32px; background: var(--text-primary); color: var(--bg-dark);
+            border-radius: 8px; font-weight: 700; transition: transform 0.2s;
         }
-
-        .home-content p { 
-            font-size: 16px; margin: 0 auto 40px; color: var(--muted-color); max-width: 600px;
-        }
-
-        /* Modern Buttons */
-        .btn-box { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(255,255,255,0.3); }
         
-        .btn {
-            padding: 14px 40px; background: var(--main-color); border-radius: 50px;
-            font-size: 15px; color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-            border: 2px solid var(--main-color); transition: 0.3s;
-            position: relative; overflow: hidden; z-index: 1;
+        .btn-secondary {
+            padding: 14px 32px; background: transparent; color: var(--text-primary);
+            border: 1px solid var(--border-subtle); border-radius: 8px; font-weight: 600;
         }
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.5s; z-index: -1;
-        }
-        .btn:hover::before { left: 100%; }
-        .btn:hover { box-shadow: 0 0 30px rgba(0, 242, 234, 0.4); transform: translateY(-3px); }
+        .btn-secondary:hover { border-color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+        /* --- 4. GENERAL SECTIONS --- */
+        section { padding: 6rem 8%; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .section-header p { color: var(--text-secondary); }
         
-        .btn-outline { 
-            padding: 14px 40px; background: transparent; border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 50px; font-size: 15px; color: #fff; font-weight: 600;
+        /* --- 5. SERVICES / SKILLS (Clean Grid) --- */
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
         }
-        .btn-outline:hover { border-color: var(--main-color); color: var(--main-color); background: rgba(0, 242, 234, 0.05); }
-
-        /* Social Icons */
-        .social-media { margin-top: 40px; }
-        .social-media a {
-            display: inline-flex; justify-content: center; align-items: center;
-            width: 45px; height: 45px; border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50%; color: var(--muted-color); margin: 0 10px; font-size: 18px;
+        .service-card {
+            background: var(--bg-card); padding: 2.5rem; border-radius: 12px;
+            border: 1px solid var(--border-subtle); transition: 0.3s;
         }
-        .social-media a:hover { border-color: var(--main-color); color: var(--main-color); background: rgba(0, 242, 234, 0.1); transform: translateY(-5px); }
-
-        /* --- 4. SECTIONS GENERAL --- */
-        section { padding: 100px 8%; }
-        .heading { text-align: center; font-size: 36px; margin-bottom: 60px; font-weight: 700; }
-        .heading span { color: var(--main-color); position: relative; display: inline-block; }
+        .service-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         
-        /* --- 5. SKILLS (Glass Cards) --- */
-        .skills-container { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; 
+        .icon-box {
+            width: 50px; height: 50px; background: rgba(56, 189, 248, 0.1);
+            color: var(--accent); display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; font-size: 1.5rem; margin-bottom: 1.5rem;
         }
-        .skill-box {
-            background: var(--card-bg); padding: 40px 30px; border-radius: 20px;
-            border: 1px solid var(--border-glass); text-align: center; transition: 0.4s;
-            position: relative; overflow: hidden;
-        }
-        .skill-box:hover { 
-            border-color: rgba(0, 242, 234, 0.3); transform: translateY(-10px); 
-            box-shadow: var(--shadow-glow);
-        }
-        .skill-box i { font-size: 45px; color: var(--main-color); margin-bottom: 25px; display: inline-block; }
-        .skill-box h3 { font-size: 1.4rem; margin-bottom: 15px; color: #fff; }
-        .skill-box p { color: var(--muted-color); font-size: 0.95rem; }
+        .service-card h3 { font-size: 1.25rem; margin-bottom: 0.8rem; }
+        .service-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; }
 
-        /* --- 6. TOOLS --- */
-        .tools-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; max-width: 900px; margin: 0 auto; }
-        .tool-item { 
-            width: 100px; height: 100px; display: flex; justify-content: center; align-items: center; 
-            flex-direction: column; background: var(--card-bg); border-radius: 18px;
-            border: 1px solid var(--border-glass); transition: 0.3s; gap: 10px;
+        /* --- 6. PORTFOLIO (Detailed Cards) --- */
+        .portfolio-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem;
         }
-        .tool-item:hover { border-color: var(--main-color); transform: scale(1.1); background: rgba(255,255,255,0.03); }
-        .tool-item i, .tool-item img { font-size: 32px; width: 32px; height: 32px; object-fit: contain; }
-        .tool-item p { font-size: 12px; color: var(--muted-color); font-weight: 500; }
-
-        /* --- 7. PORTFOLIO (Refined Grid) --- */
-        .portfolio-container { 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); display: grid; gap: 30px; 
+        .project-card {
+            background: var(--bg-card); border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border-subtle); transition: 0.3s;
+            display: flex; flex-direction: column;
         }
-        .portfolio-box {
-            position: relative; border-radius: 20px; overflow: hidden;
-            border: 1px solid var(--border-glass); height: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        .portfolio-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .portfolio-box:hover img { transform: scale(1.1); filter: grayscale(100%); }
+        .project-card:hover { border-color: var(--text-secondary); transform: translateY(-5px); }
         
-        .portfolio-layer {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-            text-align: center; padding: 0 30px;
-            background: rgba(2, 5, 10, 0.85); backdrop-filter: blur(5px);
-            opacity: 0; transition: 0.4s; transform: translateY(20px);
+        .project-img {
+            width: 100%; height: 220px; object-fit: cover; border-bottom: 1px solid var(--border-subtle);
         }
-        .portfolio-box:hover .portfolio-layer { opacity: 1; transform: translateY(0); }
+        .project-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+        .project-category { font-size: 0.75rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .project-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .project-card p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem; flex-grow: 1; }
         
-        .portfolio-layer h4 { font-size: 1.5rem; margin-bottom: 5px; color: #fff; }
-        .portfolio-layer p { font-size: 0.95rem; margin-bottom: 20px; color: var(--main-color); font-weight: 300; }
-        .icon-link {
-            width: 50px; height: 50px; background: #fff; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; color: #000; font-size: 20px;
-            transition: 0.3s;
+        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .tech-badge { 
+            font-size: 0.75rem; padding: 4px 10px; background: rgba(255,255,255,0.05); 
+            border-radius: 4px; color: var(--text-secondary);
         }
-        .icon-link:hover { background: var(--main-color); transform: scale(1.1); }
+        
+        .project-link {
+            text-align: center; padding: 10px; background: rgba(255,255,255,0.03);
+            border-radius: 6px; color: white; font-weight: 600; font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .project-link:hover { background: var(--accent); color: black; }
 
-        /* --- 8. FOOTER --- */
-        .footer { padding: 40px; text-align: center; background: #020406; color: var(--muted-color); font-size: 0.9rem; border-top: 1px solid var(--border-glass); }
+        /* --- 7. TOOLS (Minimalist) --- */
+        .tools-scroller { 
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; opacity: 0.7; 
+        }
+        .tool-icon { 
+            font-size: 2.5rem; color: var(--text-secondary); transition: 0.3s; 
+        }
+        .tool-icon:hover { color: var(--accent); transform: scale(1.1); }
 
-        /* --- 9. MOBILE --- */
+        /* --- 8. FOOTER & CONTACT --- */
+        .cta-section { 
+            background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(56, 189, 248, 0.05) 100%);
+            text-align: center; border-top: 1px solid var(--border-subtle);
+        }
+        
+        footer {
+            padding: 2rem 8%; background: #05080f; border-top: 1px solid var(--border-subtle);
+            display: flex; justify-content: space-between; align-items: center; color: var(--text-secondary); font-size: 0.9rem;
+        }
+        .footer-socials { display: flex; gap: 1rem; }
+        .footer-socials a:hover { color: white; }
+
+        /* --- 9. MOBILE RESPONSIVE --- */
         @media (max-width: 991px) {
-            header { padding: 20px 4%; }
-            section { padding: 80px 4%; }
+            header { padding: 1rem 5%; }
+            section { padding: 4rem 5%; }
         }
+
         @media (max-width: 768px) {
             #menu-icon { display: block; z-index: 1001; }
             .navbar {
-                position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
-                background: rgba(5, 10, 16, 0.95); backdrop-filter: blur(20px);
-                flex-direction: column; padding: 100px 30px; transition: 0.4s; gap: 25px;
-                border-left: 1px solid var(--border-glass);
+                position: absolute; top: 0; right: -100%;
+                width: 75%; height: 100vh;
+                background: var(--bg-card);
+                flex-direction: column; padding: 6rem 2rem;
+                border-left: 1px solid var(--border-subtle);
+                transition: 0.3s ease;
             }
             .navbar.active { right: 0; }
-            .navbar a { font-size: 1.2rem; display: block; }
+            .btn-nav { display: none; } /* Hide 'Hire Me' button in menu list on mobile to save space or move inside */
             
-            .home-content h1 { font-size: 40px; }
-            .portfolio-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-secondary { width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Satria<span>.</span></div>
+        <div class="logo">
+            <i class="fas fa-bolt"></i> SATRIA.
+        </div>
         <i class="fas fa-bars" id="menu-icon"></i>
         <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#skills">Expertise</a>
-            <a href="#tools">Stack</a>
+            <a href="#hero">Home</a>
+            <a href="#services">Services</a>
             <a href="#portfolio">Work</a>
-            <a href="#contact">Contact</a>
+            <a href="https://wa.me/6289691631938" class="btn-nav">Contact Me</a>
         </nav>
     </header>
 
-    <section class="home" id="home">
-        <div class="glow-effect"></div> <div class="home-content" data-aos="fade-up" data-aos-duration="1000">
-            <h1>Satria</h1>
+    <section class="hero" id="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <div class="badge-status">
+                <span style="width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; margin-right: 6px;"></span>
+                Open for Projects
+            </div>
+            <h1>Digital Solutions & <br> Hardware Precision</h1>
+            <p>Membantu bisnis berkembang melalui Web Development profesional, serta memastikan performa perangkat Anda tetap optimal dengan layanan IT Hardware terpercaya.</p>
             
-            <div class="typing-container">
-                I Build <span class="typing-text"></span>
+            <div class="btn-group">
+                <a href="#portfolio" class="btn-primary">Lihat Portfolio</a>
+                <a href="https://wa.me/6289691631938" class="btn-secondary">Konsultasi Gratis</a>
             </div>
             
-            <p>Menggabungkan keahlian teknis hardware dengan estetika visual digital. <br>Solusi presisi untuk Web Development, IT Support, dan Creative Editing.</p>
-
-            <div class="btn-box">
-                <a href="https://wa.me/6289691631938" class="btn">Start a Project</a>
-                <a href="https://samik-tech.vercel.app/" target="_blank" class="btn-outline">My Business</a>
-            </div>
-
-            <div class="social-media">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
+            <div class="tools-scroller" style="margin-top: 3rem; transform: scale(0.8);">
+                <i class="fab fa-html5 tool-icon"></i>
+                <i class="fab fa-css3-alt tool-icon"></i>
+                <i class="fab fa-js tool-icon"></i>
+                <i class="fab fa-react tool-icon"></i>
+                <i class="fab fa-wordpress tool-icon"></i>
+                <i class="fas fa-wrench tool-icon"></i>
             </div>
         </div>
     </section>
 
-    <section class="skills" id="skills">
-        <h2 class="heading" data-aos="fade-down">Keahlian <span>Utama</span></h2>
-        
-        <div class="skills-container">
-            <div class="skill-box" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-code"></i>
+    <section id="services">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Keahlian</h2>
+            <p>Solusi komprehensif untuk kebutuhan digital dan fisik Anda.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
                 <h3>Web Development</h3>
-                <p>Membangun website responsif dan modern dengan teknologi terbaru serta optimasi performa tinggi.</p>
+                <p>Pembuatan website Company Profile, Landing Page, hingga Toko Online dengan desain modern, cepat, dan responsif di semua perangkat.</p>
             </div>
-            <div class="skill-box" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-server"></i>
-                <h3>Hardware & IT</h3>
-                <p>Diagnosa mendalam, perbaikan hardware laptop/PC, dan manajemen sistem operasi yang stabil.</p>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box"><i class="fas fa-microchip"></i></div>
+                <h3>IT Hardware Support</h3>
+                <p>Perbaikan Laptop/PC (Software & Hardware), rakit PC sesuai budget, instalasi ulang Windows, dan maintenance jaringan kantor.</p>
             </div>
-            <div class="skill-box" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-photo-video"></i>
-                <h3>Multimedia</h3>
-                <p>Video editing sinematik dan retouching foto profesional untuk kebutuhan branding visual.</p>
+
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box"><i class="fas fa-photo-video"></i></div>
+                <h3>Multimedia Editing</h3>
+                <p>Video Editing untuk konten sosial media (Reels/TikTok), Company Video, serta Retouching Foto profesional.</p>
             </div>
         </div>
     </section>
 
-    <section class="tools" id="tools">
-        <h2 class="heading" data-aos="zoom-in">Tech <span>Arsenal</span></h2>
-        <div class="tools-container" data-aos="fade-up">
-            <div class="tool-item"><i class="fab fa-html5" style="color:#e34f26"></i><p>HTML5</p></div>
-            <div class="tool-item"><i class="fab fa-css3-alt" style="color:#2965f1"></i><p>CSS3</p></div>
-            <div class="tool-item"><i class="fab fa-js" style="color:#f7df1e"></i><p>JS</p></div>
-            <div class="tool-item"><i class="fab fa-wordpress" style="color:#21759b"></i><p>CMS</p></div>
-            <div class="tool-item"><i class="fas fa-film" style="color:#ff0055;"></i><p>Premiere</p></div>
-            <div class="tool-item"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/CapCut_icon.svg" alt="CapCut"><p>CapCut</p></div>
-            <div class="tool-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg" alt="Lr"><p>Lightroom</p></div>
-            <div class="tool-item"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg" alt="Canva"><p>Canva</p></div>
+    <section id="portfolio">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Featured Projects</h2>
+            <p>Beberapa hasil karya terbaik yang telah dikerjakan.</p>
         </div>
-    </section>
 
-    <section class="portfolio" id="portfolio">
-        <h2 class="heading" data-aos="fade-down">Featured <span>Work</span></h2>
-        
-        <div class="portfolio-container">
-            <div class="portfolio-box" data-aos="flip-left">
-                <img src="img/coffe.png" alt="Coffee Shop" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
-                <div class="portfolio-layer">
-                    <h4>Samik Coffee</h4>
-                    <p>Modern Coffee Shop Landing Page</p>
-                    <a href="https://samik-coffe.vercel.app/" class="icon-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+        <div class="portfolio-grid">
+            <div class="project-card" data-aos="fade-up">
+                <img src="img/coffe.png" class="project-img" alt="Coffee Web" onerror="this.src='https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1000'">
+                <div class="project-content">
+                    <span class="project-category">F&B Website</span>
+                    <h3>Samik Coffee</h3>
+                    <p>Landing page modern untuk coffee shop dengan integrasi menu digital.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">HTML/CSS</span>
+                        <span class="tech-badge">Javascript</span>
+                    </div>
+                    <a href="https://samik-coffe.vercel.app/" target="_blank" class="project-link">Visit Site <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <div class="portfolio-box" data-aos="flip-left" data-aos-delay="100">
-                <img src="img/kasir.png" alt="POS System" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
-                <div class="portfolio-layer">
-                    <h4>POS System</h4>
-                    <p>Web-based Cashier Application</p>
-                    <a href="https://samikstore-pos.vercel.app/" class="icon-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="img/kasir.png" class="project-img" alt="POS System" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
+                <div class="project-content">
+                    <span class="project-category">Web App</span>
+                    <h3>Samik POS</h3>
+                    <p>Sistem kasir berbasis web untuk manajemen transaksi UMKM.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">React JS</span>
+                        <span class="tech-badge">Tailwind</span>
+                    </div>
+                    <a href="https://samikstore-pos.vercel.app/" target="_blank" class="project-link">Visit App <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <div class="portfolio-box" data-aos="flip-left" data-aos-delay="200">
-                <img src="img/showroom.png" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=1000'">
-                <div class="portfolio-layer">
-                    <h4>Auto Showroom</h4>
-                    <p>Digital Catalog for Vehicles</p>
-                    <a href="https://samik-showrm.vercel.app/" class="icon-link" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </div>
-
-            <div class="portfolio-box" data-aos="flip-left">
-                <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=1000" alt="Sushi">
-                <div class="portfolio-layer">
-                    <h4>Sushi Order</h4>
-                    <p>QR Code Dine-in System</p>
-                    <a href="https://samik-sushi.vercel.app/" class="icon-link" target="_blank"><i class="fas fa-utensils"></i></a>
-                </div>
-            </div>
-
-            <div class="portfolio-box" data-aos="flip-left" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059ee971?q=80&w=1000" alt="Property">
-                <div class="portfolio-layer">
-                    <h4>AI Property</h4>
-                    <p>Real Estate Valuation System</p>
-                    <a href="https://satria-aitech-properti.streamlit.app/" class="icon-link" target="_blank"><i class="fas fa-chart-line"></i></a>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="img/showroom.png" class="project-img" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1494905998402-395d579af97d?q=80&w=1000'">
+                <div class="project-content">
+                    <span class="project-category">Business Profile</span>
+                    <h3>Auto Showroom</h3>
+                    <p>Katalog digital interaktif untuk dealer mobil bekas berkualitas.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Bootstrap</span>
+                        <span class="tech-badge">AOS</span>
+                    </div>
+                    <a href="https://samik-showrm.vercel.app/" target="_blank" class="project-link">Visit Site <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact" id="contact" data-aos="fade-up">
-        <h2 class="heading">Let's <span>Collaborate</span></h2>
-        <p style="margin-bottom:40px; color:var(--muted-color); font-size:1.1rem;">
-            Punya ide website, butuh perbaikan PC, atau ingin video estetik? <br>Mari wujudkan ide Anda.
-        </p>
-        <a href="https://wa.me/6289691631938" class="btn"><i class="fab fa-whatsapp"></i> Chat WhatsApp</a>
+    <section class="cta-section" data-aos="zoom-in">
+        <h2>Siap Memulai Proyek?</h2>
+        <p style="margin-bottom: 2rem;">Diskusikan ide Anda, dan saya akan memberikan solusi teknis terbaik.</p>
+        <a href="https://wa.me/6289691631938" class="btn-primary"><i class="fab fa-whatsapp"></i> Chat WhatsApp Sekarang</a>
     </section>
 
-    <footer class="footer">
-        <p>Copyright &copy; 2024 by Satria | Built with Precision.</p>
+    <footer>
+        <div>
+            &copy; <span id="year"></span> <strong>Satria</strong>. All Rights Reserved.
+        </div>
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. Initialize Animation Library (AOS)
+        // 1. Init Animations
         AOS.init({
-            offset: 100,
-            duration: 1000,
-            easing: 'ease-in-out',
+            duration: 800,
             once: true,
+            offset: 100
         });
 
-        // 2. Typing Animation (Refined)
-        const typingText = document.querySelector(".typing-text");
-        const words = ["Digital Experiences.", "Powerful Hardware.", "Cinematic Visuals.", "Web Solutions."];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        // 2. Dynamic Year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        const typeEffect = () => {
-            const currentWord = words[wordIndex];
-            const currentChar = currentWord.substring(0, charIndex);
-            typingText.textContent = currentChar;
+        // 3. Mobile Menu Logic
+        const menuIcon = document.getElementById('menu-icon');
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.navbar a');
 
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex < currentWord.length) {
-                charIndex++;
-            } else if (isDeleting && charIndex > 0) {
-                charIndex--;
-            } else {
-                isDeleting = !isDeleting;
-                typeSpeed = 2000; // Pause at end of word
-                if (!isDeleting) wordIndex = (wordIndex + 1) % words.length;
-            }
-            setTimeout(typeEffect, typeSpeed);
-        }
-        typeEffect();
-
-        // 3. Mobile Menu & Active Link Switcher
-        let menuIcon = document.querySelector('#menu-icon');
-        let navbar = document.querySelector('.navbar');
-        let sections = document.querySelectorAll('section');
-        let navLinks = document.querySelectorAll('header nav a');
-
-        menuIcon.onclick = () => {
+        menuIcon.addEventListener('click', () => {
             menuIcon.classList.toggle('fa-times');
             navbar.classList.toggle('active');
-        }
+        });
 
-        window.onscroll = () => {
-            // Close menu on scroll
-            menuIcon.classList.remove('fa-times');
-            navbar.classList.remove('active');
-
-            // Active Link Highlighter
-            sections.forEach(sec => {
-                let top = window.scrollY;
-                let offset = sec.offsetTop - 150;
-                let height = sec.offsetHeight;
-                let id = sec.getAttribute('id');
-
-                if(top >= offset && top < offset + height) {
-                    navLinks.forEach(links => {
-                        links.classList.remove('active');
-                        document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-                    });
-                }
+        // Close menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuIcon.classList.remove('fa-times');
+                navbar.classList.remove('active');
             });
-        };
-    </script>
+        });
 
+        // 4. Navbar Glass Effect on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
 </body>
 </html>
