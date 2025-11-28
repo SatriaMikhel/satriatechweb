@@ -7,7 +7,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://samik.my.id/">
     <meta property="og:title" content="SATRIA | SYSTEM ONLINE">
-    <meta property="og:description" content="Visual Engineer & Hardware Specialist. Web Dev, AI, & Creative.">
+    <meta property="og:description" content="Visual Engineer & AI Integrator. Web Dev, AI Solutions, & Creative.">
     <meta property="og:image" content="https://samik.my.id/img/thumbnail.jpg">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💠</text></svg>">
@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -35,7 +34,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        /* Hide Default Cursor only on Desktop */
+        /* Cursor hilang hanya di Desktop */
         @media (min-width: 769px) { * { cursor: none; } }
 
         html { scroll-behavior: smooth; }
@@ -50,7 +49,7 @@
                 linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
             line-height: 1.6;
-            padding-bottom: 80px; /* Space for Mobile Nav */
+            padding-bottom: 90px; /* Jarak aman untuk Menu Bawah di HP */
         }
 
         /* --- 2. BOOT SCREEN --- */
@@ -96,7 +95,7 @@
             z-index: 50; pointer-events: none; opacity: 0.6;
         }
         .top-left { top: 15px; left: 15px; border-right: none; border-bottom: none; }
-        .bottom-right { bottom: 85px; right: 15px; border-left: none; border-top: none; } /* Adjusted for mobile nav */
+        .bottom-right { bottom: 85px; right: 15px; border-left: none; border-top: none; }
 
         .sys-stats {
             position: fixed; bottom: 90px; left: 20px; font-family: 'Share Tech Mono', monospace;
@@ -121,20 +120,21 @@
         .nav-link::after { content: ']'; margin-left: 5px; opacity: 0; transition: 0.3s; color: var(--primary); }
         .nav-link:hover::before, .nav-link:hover::after { opacity: 1; }
 
-        /* --- 6. MOBILE BOTTOM NAV (New Feature) --- */
+        /* --- 6. MOBILE BOTTOM NAV (Aplikasi Style) --- */
         .mobile-nav {
             display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; background: rgba(5, 10, 15, 0.85); backdrop-filter: blur(12px);
+            width: 90%; background: rgba(5, 10, 15, 0.9); backdrop-filter: blur(15px);
             border: 1px solid var(--border); border-radius: 50px;
-            padding: 12px 25px; z-index: 1000; justify-content: space-between; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 12px 30px; z-index: 1000; justify-content: space-between; align-items: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
         .mobile-nav a {
-            color: var(--text-muted); font-size: 1.2rem; position: relative; transition: 0.3s; display: flex; flex-direction: column; align-items: center;
+            color: var(--text-muted); font-size: 1.3rem; position: relative; transition: 0.3s;
         }
         .mobile-nav a:hover, .mobile-nav a.active { color: var(--primary); transform: translateY(-3px); }
         .mobile-nav a.active::after {
-            content: ''; width: 4px; height: 4px; background: var(--primary); border-radius: 50%; margin-top: 4px;
+            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 4px; background: var(--primary); border-radius: 50%;
         }
 
         /* --- 7. HERO SECTION --- */
@@ -178,10 +178,10 @@
         @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
 
         /* Social Hub */
-        .social-hub { display: flex; gap: 12px; flex-wrap: wrap; }
+        .social-hub { display: flex; gap: 15px; flex-wrap: wrap; }
         .social-btn {
-            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--primary); color: var(--primary); font-size: 1.2rem;
+            width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--primary); color: var(--primary); font-size: 1.4rem;
             text-decoration: none; transition: 0.3s; background: rgba(0, 243, 255, 0.05);
             clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%);
         }
@@ -193,7 +193,7 @@
         .section-title { font-size: 1.8rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         .section-subtitle { font-family: 'Share Tech Mono'; color: var(--primary); font-size: 0.85rem; }
 
-        /* --- 9. SERVICES --- */
+        /* --- 9. SERVICES (Grid Rapi) --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .service-card {
             background: var(--glass); border: 1px solid var(--border); padding: 25px;
@@ -204,7 +204,7 @@
         .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; text-transform: uppercase; }
         .service-card p { font-size: 0.9rem; color: var(--text-muted); }
 
-        /* --- 10. TECH STACK --- */
+        /* --- 10. TECH STACK (Grid & Badge) --- */
         .stack-wrapper {
             background: rgba(2, 10, 20, 0.4); border: 1px solid var(--border); padding: 25px; position: relative;
         }
@@ -218,7 +218,7 @@
         }
         .stack-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-start; }
         
-        .tech-badge { height: 28px; transition: 0.3s; filter: grayscale(100%) opacity(0.6); }
+        .tech-badge { height: 30px; transition: 0.3s; filter: grayscale(100%) opacity(0.6); }
         
         .stack-category {
             font-family: 'Share Tech Mono'; color: var(--primary); font-size: 0.85rem;
@@ -306,11 +306,11 @@
 
     <section class="hero">
         <div data-aos="fade-right">
-            <div class="hero-label">SYSTEM_INITIALIZED // V.5.0</div>
+            <div class="hero-label">SYSTEM_INITIALIZED // V.5.1</div>
             
             <h1>
                 I AM A <br>
-                <span class="txt-type" data-wait="2000" data-words='["WEB DEV & DESIGN", "AI SOLUTIONS", "HARDWARE TECH", "VISUAL ARTIST"]'></span>
+                <span class="txt-type" data-wait="2000" data-words='["WEB DEV & DESIGN", "AI SOLUTIONS", "VISUAL ARTIST"]'></span>
             </h1>
 
             <p class="hero-desc">
@@ -352,17 +352,14 @@
                 <h3>Web Dev & Design</h3>
                 <p>Website responsif dengan UI/UX modern yang memprioritaskan fungsi dan estetika.</p>
             </div>
+            
             <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-brain"></i>
                 <h3>AI & Automation</h3>
                 <p>Integrasi kecerdasan buatan, otomasi cerdas, dan analisis data untuk efisiensi sistem.</p>
             </div>
+
             <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-microchip"></i>
-                <h3>Hardware & Tech</h3>
-                <p>Diagnosa, perakitan PC, troubleshooting, dan maintenance sistem hardware.</p>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-camera"></i>
                 <h3>Photo & Video</h3>
                 <p>Fotografi profesional dan video editing sinematik untuk konten visual.</p>
@@ -463,7 +460,6 @@
 
     <footer>
         <div>&copy; 2024 SATRIA. ALL SYSTEMS NOMINAL.</div>
-        <div style="opacity: 0.5; font-size: 0.7rem;">DESIGNED WITH ARTIFICIAL INTELLIGENCE</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -474,7 +470,7 @@
         const terminal = document.getElementById('terminal');
         const bootScreen = document.getElementById('boot-screen');
         const lines = [
-            "INITIALIZING SATRIA_SYSTEM V5.0...",
+            "INITIALIZING SATRIA_SYSTEM V5.1...",
             "LOADING KERNEL MODULES... OK",
             "CHECKING MEMORY... 64GB OK",
             "INTEGRATING AI CO-PROCESSOR...",
@@ -502,7 +498,7 @@
         }
         window.onload = typeBootLine;
 
-        // B. CUSTOM CURSOR
+        // B. CUSTOM CURSOR (PC Only)
         const outer = document.querySelector('.cursor-outer');
         const inner = document.querySelector('.cursor-inner');
         document.addEventListener('mousemove', (e) => {
@@ -524,7 +520,7 @@
             }
         }, 2000);
 
-        // D. TYPEWRITER
+        // D. TYPEWRITER EFFECT
         class TypeWriter {
             constructor(txtElement, words, wait = 3000) {
                 this.txtElement = txtElement;
@@ -565,13 +561,13 @@
             new TypeWriter(txtElement, words, wait);
         }
 
-        // E. AUDIO & VIBRATE (Mobile Haptics)
+        // E. AUDIO & HAPTIC FEEDBACK (Interactive)
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playHoverSound() {
-            // Haptic Feedback for Mobile
+            // Getar di HP
             if (navigator.vibrate) navigator.vibrate(10);
             
-            // Sound for Desktop
+            // Suara di PC
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
@@ -586,11 +582,11 @@
             oscillator.stop(audioCtx.currentTime + 0.05);
         }
         document.querySelectorAll('a, .service-card, .project-card, .tech-badge').forEach(el => {
-            el.addEventListener('mouseenter', playHoverSound); // Desktop Hover
-            el.addEventListener('touchstart', playHoverSound); // Mobile Touch
+            el.addEventListener('mouseenter', playHoverSound);
+            el.addEventListener('touchstart', playHoverSound);
         });
 
-        // F. PARTICLES ANIMATION
+        // F. PARTICLES ANIMATION (Optimized for Mobile)
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width, height, particles;
@@ -600,7 +596,7 @@
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-            // Reduce particles on mobile for performance
+            // Kurangi jumlah partikel di HP agar ringan
             const particleCount = width < 768 ? 20 : 50; 
             particles = [];
             for (let i = 0; i < particleCount; i++) {
@@ -635,7 +631,7 @@
         window.addEventListener('resize', initParticles);
         initParticles();
 
-        // G. MOBILE NAV ACTIVE STATE
+        // G. MOBILE NAV ACTIVE STATE (Pindah otomatis saat scroll)
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.mobile-nav a');
         window.addEventListener('scroll', () => {
