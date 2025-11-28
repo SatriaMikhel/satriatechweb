@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Satria - Visual Engineer & Hardware Specialist.">
     <title>SATRIA | SYSTEM ONLINE</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,288 +14,318 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        /* --- 1. CORE VARIABLES --- */
         :root {
-            --bg: #020408;
-            --primary: #00f3ff; /* Electric Cyan */
+            --bg: #030508;
+            --primary: #00f3ff; /* Cyan Neon */
             --secondary: #0066ff; /* Deep Blue */
-            --glass: rgba(0, 243, 255, 0.05);
-            --border: rgba(0, 243, 255, 0.3);
-            --text: #e0f7fa;
+            --text-main: #e0f7fa;
+            --text-muted: #8899a6;
+            --border: rgba(0, 243, 255, 0.2);
+            --glass: rgba(2, 10, 20, 0.7);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Hide default cursor */ }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; /* Custom Cursor */ }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg);
-            color: var(--text);
+            color: var(--text-main);
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
             background-image: 
                 linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-size: 50px 50px;
+            line-height: 1.6;
         }
 
-        /* --- 1. HUD CURSOR (Target Bidik) --- */
-        .cursor-crosshair {
-            position: fixed; width: 30px; height: 30px;
-            border: 1px solid var(--primary); border-radius: 50%;
+        /* --- 2. CUSTOM HUD CURSOR --- */
+        .cursor-outer {
+            position: fixed; width: 40px; height: 40px;
+            border: 1px dashed var(--primary); border-radius: 50%;
             transform: translate(-50%, -50%); pointer-events: none; z-index: 9999;
-            transition: width 0.2s, height 0.2s;
+            transition: width 0.2s, height 0.2s, background 0.2s;
             mix-blend-mode: difference;
         }
-        .cursor-dot {
-            position: fixed; width: 4px; height: 4px; background: var(--primary);
+        .cursor-inner {
+            position: fixed; width: 6px; height: 6px; background: var(--primary);
             border-radius: 50%; transform: translate(-50%, -50%);
             pointer-events: none; z-index: 9999;
         }
-        /* Hover Effect */
-        body:hover .cursor-crosshair { opacity: 1; }
-        a:hover ~ .cursor-crosshair, .project-card:hover ~ .cursor-crosshair {
-            width: 50px; height: 50px; background: rgba(0, 243, 255, 0.1); border-style: dashed;
+        
+        /* Interactive Hover State */
+        body a:hover ~ .cursor-outer, body button:hover ~ .cursor-outer {
+            width: 60px; height: 60px; background: rgba(0, 243, 255, 0.1); border-style: solid;
         }
 
-        /* --- 2. DECORATIVE HUD ELEMENTS --- */
+        /* --- 3. DECORATIVE ELEMENTS (HUD) --- */
         .scan-line {
-            position: fixed; top: 0; left: 0; width: 100%; height: 5px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 2px;
             background: linear-gradient(to right, transparent, var(--primary), transparent);
-            opacity: 0.5; animation: scan 4s linear infinite; z-index: 0; pointer-events: none;
+            opacity: 0.3; animation: scan 6s linear infinite; z-index: 0; pointer-events: none;
         }
         @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
 
         .hud-corner {
-            position: fixed; width: 100px; height: 100px; border: 2px solid var(--border);
-            z-index: 50; pointer-events: none; opacity: 0.5;
+            position: fixed; width: 60px; height: 60px; border: 2px solid var(--border);
+            z-index: 50; pointer-events: none; opacity: 0.6;
         }
         .top-left { top: 20px; left: 20px; border-right: none; border-bottom: none; }
         .bottom-right { bottom: 20px; right: 20px; border-left: none; border-top: none; }
 
-        .system-stats {
+        .sys-stats {
             position: fixed; bottom: 30px; left: 40px; font-family: 'Share Tech Mono', monospace;
-            color: var(--primary); font-size: 12px; z-index: 50; display: flex; gap: 20px;
+            color: var(--primary); font-size: 11px; z-index: 50; display: flex; flex-direction: column; gap: 5px; opacity: 0.7;
         }
 
-        /* --- 3. HEADER --- */
+        /* --- 4. HEADER --- */
         header {
-            position: fixed; top: 0; width: 100%; padding: 30px 50px;
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
-            background: linear-gradient(to bottom, #020408 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(3,5,8,0.9) 0%, transparent 100%);
+            backdrop-filter: blur(5px);
         }
         .logo { 
-            font-size: 24px; font-weight: 700; letter-spacing: 3px; 
-            text-shadow: 0 0 10px var(--primary);
+            font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
         }
-        .status-badge {
-            font-family: 'Share Tech Mono', monospace; font-size: 12px;
-            padding: 5px 15px; border: 1px solid var(--primary); color: var(--primary);
-            text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(0,243,255,0.2);
+        .nav-menu { display: flex; gap: 30px; }
+        .nav-link { 
+            font-family: 'Share Tech Mono', monospace; font-size: 14px; color: var(--text-muted); 
+            position: relative; transition: 0.3s;
         }
+        .nav-link:hover { color: var(--primary); }
+        .nav-link::before { content: '['; margin-right: 5px; opacity: 0; transition: 0.3s; color: var(--primary); }
+        .nav-link::after { content: ']'; margin-left: 5px; opacity: 0; transition: 0.3s; color: var(--primary); }
+        .nav-link:hover::before, .nav-link:hover::after { opacity: 1; }
 
-        /* --- 4. HERO SECTION --- */
+        /* --- 5. HERO SECTION --- */
         .hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            padding: 0 10%; position: relative;
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 0 10%; position: relative; padding-top: 60px;
         }
-        .hero-subtitle {
-            font-family: 'Share Tech Mono', monospace; color: var(--primary);
-            margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        .hero-label {
+            font-family: 'Share Tech Mono', monospace; color: var(--primary); margin-bottom: 15px;
+            font-size: 14px; letter-spacing: 1px; display: flex; align-items: center; gap: 10px;
         }
-        .hero-subtitle::before { content: ''; width: 20px; height: 2px; background: var(--primary); }
-        
+        .hero-label::before { content: ''; width: 30px; height: 1px; background: var(--primary); }
+
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 7rem); line-height: 0.9; text-transform: uppercase;
-            font-weight: 700; margin-bottom: 20px;
-            background: linear-gradient(to right, #fff, #888);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: clamp(2.5rem, 7vw, 6rem); line-height: 1; text-transform: uppercase;
+            font-weight: 700; margin-bottom: 25px; color: #fff;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
         }
         
         .hero-desc {
-            max-width: 600px; font-size: 1.2rem; color: #aab; line-height: 1.6;
-            border-left: 2px solid var(--secondary); padding-left: 20px;
+            max-width: 550px; font-size: 1.1rem; color: var(--text-muted); margin-bottom: 40px;
+            border-left: 2px solid var(--border); padding-left: 20px;
         }
 
-        /* --- 5. HOLOGRAPHIC CARDS (Skills & Projects) --- */
-        section { padding: 100px 10%; }
+        .cta-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 35px; border: 1px solid var(--primary); color: var(--primary);
+            font-family: 'Share Tech Mono', monospace; text-transform: uppercase;
+            letter-spacing: 2px; font-size: 14px; background: rgba(0, 243, 255, 0.05);
+            transition: 0.3s; position: relative; overflow: hidden; width: fit-content;
+        }
+        .cta-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(0, 243, 255, 0.4); }
+
+        /* --- 6. SERVICES (New Proper Section) --- */
+        section { padding: 80px 10%; }
+        .section-header { margin-bottom: 50px; }
         .section-title {
-            font-size: 1.5rem; color: var(--primary); margin-bottom: 50px;
-            border-bottom: 1px solid var(--border); padding-bottom: 10px;
-            display: inline-block; font-family: 'Share Tech Mono', monospace;
+            font-size: 2rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;
+        }
+        .section-subtitle {
+            font-family: 'Share Tech Mono'; color: var(--primary); font-size: 0.9rem;
         }
 
-        .grid-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
         }
+        .service-card {
+            background: var(--glass); border: 1px solid var(--border); padding: 30px;
+            transition: 0.3s; position: relative;
+        }
+        .service-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .service-card i { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+        .service-card h3 { font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .service-card p { font-size: 0.95rem; color: var(--text-muted); }
 
-        .holo-card {
+        /* --- 7. PROJECTS (Holographic Cards) --- */
+        .project-card {
             background: rgba(2, 10, 20, 0.6); border: 1px solid var(--border);
-            padding: 10px; position: relative; transition: 0.3s;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%);
+            padding: 10px; transition: 0.4s; position: relative; display: block;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 100%, 0 100%); /* Sudut techy */
         }
-        .holo-card:hover { 
-            background: rgba(0, 243, 255, 0.05); border-color: var(--primary); 
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1); transform: translateY(-5px);
-        }
-
-        .card-img-box {
-            width: 100%; height: 200px; overflow: hidden; position: relative;
-            border-bottom: 1px solid var(--border);
+        .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        
+        .card-img-wrap {
+            width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid var(--border);
+            position: relative;
         }
         .card-img {
-            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) cyan(1);
-            transition: 0.5s; opacity: 0.8;
+            width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.1);
+            transition: 0.5s;
         }
-        .holo-card:hover .card-img { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+        .project-card:hover .card-img { filter: grayscale(0%); transform: scale(1.05); }
+        
+        .card-body { padding: 20px 10px; }
+        .card-title { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; color: #fff; }
+        .card-meta { font-family: 'Share Tech Mono'; font-size: 0.8rem; color: var(--primary); margin-top: 5px; }
 
-        .card-content { padding: 20px 10px; }
-        .card-title { font-size: 1.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
-        .card-tech { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--primary); }
-
-        /* Skill Bars HUD */
-        .skill-hud { margin-bottom: 20px; }
-        .skill-name { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 600; }
-        .progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); }
-        .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: 1s ease-out; box-shadow: 0 0 10px var(--primary); }
-
-        /* --- 6. CTA BUTTON --- */
-        .cta-btn {
-            display: inline-block; padding: 15px 40px; 
-            border: 1px solid var(--primary); color: var(--primary);
-            font-family: 'Share Tech Mono', monospace; text-transform: uppercase;
-            letter-spacing: 2px; position: relative; overflow: hidden; margin-top: 40px;
-            background: transparent; transition: 0.3s;
+        /* --- 8. FOOTER --- */
+        footer {
+            padding: 50px 10%; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Share Tech Mono'; font-size: 0.9rem; color: var(--text-muted);
         }
-        .cta-btn::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: var(--primary); transition: 0.5s; z-index: -1;
-        }
-        .cta-btn:hover::before { left: 0; }
-        .cta-btn:hover { color: black; box-shadow: 0 0 20px var(--primary); }
+        .socials a { margin-left: 20px; font-size: 1.2rem; transition: 0.3s; }
+        .socials a:hover { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* --- 7. RESPONSIVE --- */
+        /* --- 9. RESPONSIVE --- */
         @media (max-width: 768px) {
-            .cursor-crosshair, .cursor-dot { display: none; } /* Matikan cursor di HP */
-            .hud-corner { width: 50px; height: 50px; }
-            header { padding: 20px; }
-            .hero h1 { font-size: 3rem; }
-            .system-stats { display: none; }
+            .cursor-outer, .cursor-inner { display: none; } /* Disable custom cursor on mobile */
+            header { padding: 20px 5%; }
+            .nav-menu { display: none; } /* Hide menu text on mobile for simplicity */
+            .logo { font-size: 1.2rem; }
+            .hero h1 { font-size: 2.8rem; }
+            section { padding: 60px 5%; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+            .sys-stats { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="cursor-crosshair"></div>
-    <div class="cursor-dot"></div>
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
     <div class="scan-line"></div>
     <div class="hud-corner top-left"></div>
     <div class="hud-corner bottom-right"></div>
 
-    <div class="system-stats">
-        <div>CPU: <span id="cpu">12</span>%</div>
-        <div>RAM: <span id="ram">4.2</span>GB</div>
-        <div>NET: ONLINE</div>
+    <div class="sys-stats">
+        <span>CPU: <span id="cpu">0</span>%</span>
+        <span>RAM: <span id="ram">0</span>GB</span>
+        <span>SYS: ONLINE</span>
     </div>
 
     <header data-aos="fade-down">
         <div class="logo">SATRIA<span style="color:var(--primary)">.DEV</span></div>
-        <div class="status-badge">● SYSTEM READY</div>
+        <nav class="nav-menu">
+            <a href="#services" class="nav-link">MODULES</a>
+            <a href="#projects" class="nav-link">DATABASE</a>
+        </nav>
     </header>
 
     <section class="hero">
         <div data-aos="fade-right">
-            <div class="hero-subtitle">INITIALIZING PORTFOLIO PROTOCOL</div>
+            <div class="hero-label">SYSTEM_INITIALIZED // V.2.0</div>
             <h1>VISUAL<br>ENGINEER</h1>
             <p class="hero-desc">
-                Menggabungkan logika hardware presisi dengan estetika visual digital.
-                Spesialis dalam Web Development, Diagnosa Sistem, dan Creative Editing.
+                Solusi presisi untuk kebutuhan digital dan fisik.
+                Menggabungkan logika Hardware, Web Development modern, dan Estetika Visual.
             </p>
             <a href="https://instagram.com/username_anda" target="_blank" class="cta-btn">
-                [ ACCESS TERMINAL ]
+                [ INITIATE CONTACT ]
             </a>
         </div>
     </section>
 
-    <section>
-        <div class="section-title" data-aos="fade-right">// SKILL_MODULES_LOADED</div>
-        <div class="grid-container">
-            <div class="skill-hud" data-aos="fade-up">
-                <div class="skill-name">WEB DEVELOPMENT <span style="color:var(--primary)">95%</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+    <section id="services">
+        <div class="section-header" data-aos="fade-up">
+            <div class="section-subtitle">// CAPABILITIES</div>
+            <h2 class="section-title">Active Modules</h2>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up">
+                <i class="fas fa-code"></i>
+                <h3>Web Development</h3>
+                <p>Membangun website responsif, landing page futuristik, dan sistem aplikasi web yang efisien.</p>
             </div>
-            <div class="skill-hud" data-aos="fade-up" data-aos-delay="100">
-                <div class="skill-name">HARDWARE DIAGNOSTIC <span style="color:var(--primary)">98%</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width: 98%"></div></div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-microchip"></i>
+                <h3>Hardware Logic</h3>
+                <p>Perakitan PC, troubleshooting sistem, dan pemeliharaan infrastruktur IT yang andal.</p>
             </div>
-            <div class="skill-hud" data-aos="fade-up" data-aos-delay="200">
-                <div class="skill-name">VISUAL EDITING <span style="color:var(--primary)">88%</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width: 88%"></div></div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-eye"></i>
+                <h3>Visual Design</h3>
+                <p>Video editing sinematik, color grading, dan desain antarmuka yang memanjakan mata.</p>
             </div>
         </div>
     </section>
 
-    <section>
-        <div class="section-title" data-aos="fade-right">// PROJECT_DATABASE</div>
-        
-        <div class="grid-container">
-            <a href="https://samik-coffe.vercel.app/" target="_blank" class="holo-card" data-aos="zoom-in">
-                <div class="card-img-box">
-                    <img src="img/coffe.png" class="card-img" alt="Coffee" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
+    <section id="projects">
+        <div class="section-header" data-aos="fade-up">
+            <div class="section-subtitle">// PORTFOLIO</div>
+            <h2 class="section-title">Project Database</h2>
+        </div>
+
+        <div class="services-grid">
+            <a href="https://samik-coffe.vercel.app/" target="_blank" class="project-card" data-aos="zoom-in">
+                <div class="card-img-wrap">
+                    <img src="img/coffe.png" class="card-img" alt="Project 1" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
                 </div>
-                <div class="card-content">
+                <div class="card-body">
                     <div class="card-title">Samik Coffee</div>
-                    <div class="card-tech">HTML5 • CSS3 • ANIMATION</div>
+                    <div class="card-meta">HTML5 / CSS / ANIMATION</div>
                 </div>
             </a>
 
-            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="holo-card" data-aos="zoom-in" data-aos-delay="100">
-                <div class="card-img-box">
-                    <img src="img/kasir.png" class="card-img" alt="POS" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
+            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card-img-wrap">
+                    <img src="img/kasir.png" class="card-img" alt="Project 2" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
                 </div>
-                <div class="card-content">
+                <div class="card-body">
                     <div class="card-title">POS System</div>
-                    <div class="card-tech">REACT • DATABASE • LOGIC</div>
+                    <div class="card-meta">REACT / LOGIC / DATA</div>
                 </div>
             </a>
 
-            <a href="https://samik-showrm.vercel.app/" target="_blank" class="holo-card" data-aos="zoom-in" data-aos-delay="200">
-                <div class="card-img-box">
-                    <img src="img/showroom.png" class="card-img" alt="Showroom" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
+            <a href="https://samik-showrm.vercel.app/" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card-img-wrap">
+                    <img src="img/showroom.png" class="card-img" alt="Project 3" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
                 </div>
-                <div class="card-content">
+                <div class="card-body">
                     <div class="card-title">Auto Gallery</div>
-                    <div class="card-tech">BOOTSTRAP • JS • INTERACTIVE</div>
+                    <div class="card-meta">INTERACTIVE / CATALOG</div>
                 </div>
             </a>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 50px; border-top: 1px solid var(--border); margin-top: 50px;">
-        <div style="font-family: 'Share Tech Mono'; color: var(--text); opacity: 0.5; font-size: 12px;">
-            SYSTEM TERMINATED. COPYRIGHT 2024 SATRIA.
+    <footer>
+        <div>&copy; 2024 SATRIA. ALL SYSTEMS NOMINAL.</div>
+        <div class="socials">
+            <a href="https://instagram.com/username_anda" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS
         AOS.init({ duration: 800, once: true });
 
         // Custom Cursor Logic
-        const cursor = document.querySelector('.cursor-crosshair');
-        const dot = document.querySelector('.cursor-dot');
+        const outer = document.querySelector('.cursor-outer');
+        const inner = document.querySelector('.cursor-inner');
 
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            dot.style.left = e.clientX + 'px';
-            dot.style.top = e.clientY + 'px';
+            outer.style.top = e.clientY + 'px';
+            outer.style.left = e.clientX + 'px';
+            inner.style.top = e.clientY + 'px';
+            inner.style.left = e.clientX + 'px';
         });
 
-        // Fake System Stats Randomizer
+        // Stats Simulation
         setInterval(() => {
-            document.getElementById('cpu').innerText = Math.floor(Math.random() * 30) + 10;
-            document.getElementById('ram').innerText = (Math.random() * 2 + 3).toFixed(1);
-        }, 1000);
+            document.getElementById('cpu').innerText = Math.floor(Math.random() * 40) + 10;
+            document.getElementById('ram').innerText = (Math.random() * 4 + 2).toFixed(1);
+        }, 2000);
     </script>
 </body>
 </html>
