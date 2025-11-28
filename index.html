@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Satria - Visual Engineer & Hardware Specialist.">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://samik.my.id/">
+    <meta property="og:title" content="SATRIA | SYSTEM ONLINE">
+    <meta property="og:description" content="Visual Engineer & Hardware Specialist. Web Dev, Tech, & Creative.">
+    <meta property="og:image" content="https://samik.my.id/img/thumbnail.jpg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💠</text></svg>">
+
     <title>SATRIA | SYSTEM ONLINE</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +74,7 @@
             pointer-events: none; z-index: 9999;
         }
         
-        body a:hover ~ .cursor-outer, body button:hover ~ .cursor-outer, .tech-badge:hover ~ .cursor-outer {
+        body a:hover ~ .cursor-outer, body button:hover ~ .cursor-outer, .tech-badge:hover ~ .cursor-outer, .project-card:hover ~ .cursor-outer {
             width: 60px; height: 60px; background: rgba(0, 243, 255, 0.1); border-style: solid;
         }
 
@@ -231,11 +239,11 @@
             header { padding: 20px 5%; }
             .nav-menu { display: none; } 
             .logo { font-size: 1.2rem; }
-            .hero h1 { font-size: 2.2rem; min-height: 3em; } /* Adjust height for typewriter */
+            .hero h1 { font-size: 2.2rem; min-height: 3em; } 
             section { padding: 60px 5%; }
             footer { flex-direction: column; gap: 20px; text-align: center; }
             .sys-stats { display: none; }
-            .tech-badge { height: 28px; filter: grayscale(0%) opacity(1); } /* Always colored on mobile */
+            .tech-badge { height: 28px; filter: grayscale(0%) opacity(1); }
         }
     </style>
 </head>
@@ -301,7 +309,7 @@
             <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                 <i class="fas fa-microchip"></i>
                 <h3>Hardware & Tech</h3>
-                <p>Diagnosa kerusakan, perakitan PC, troubleshooting, dan pemeliharaan sistem perangkat keras (Basic Technician).</p>
+                <p>Diagnosa kerusakan, perakitan PC, troubleshooting, dan pemeliharaan sistem perangkat keras.</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                 <i class="fas fa-camera"></i>
@@ -343,7 +351,6 @@
                 <img src="https://img.shields.io/badge/Nvidia-76B900?style=for-the-badge&logo=nvidia&logoColor=white" class="tech-badge" alt="Nvidia">
                 <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" class="tech-badge" alt="Windows">
                 <img src="https://img.shields.io/badge/Cisco-1BA0D7?style=for-the-badge&logo=cisco&logoColor=white" class="tech-badge" alt="Cisco">
-
             </div>
         </div>
     </section>
@@ -496,6 +503,33 @@
             const wait = txtElement.getAttribute('data-wait');
             new TypeWriter(txtElement, words, wait);
         }
+
+        // --- E. Audio Effect (Hover Sound) ---
+        // Bunyi "Bip" Digital Halus saat Hover
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playHoverSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(1200, audioCtx.currentTime); 
+            oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05);
+            
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.05);
+        }
+
+        document.querySelectorAll('a, .service-card, .project-card, .tech-badge').forEach(el => {
+            el.addEventListener('mouseenter', playHoverSound);
+        });
     </script>
 </body>
 </html>
