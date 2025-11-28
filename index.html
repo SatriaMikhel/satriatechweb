@@ -30,7 +30,6 @@
             --text-muted: #8b9bb4;
             --border: rgba(0, 243, 255, 0.15);
             --glass: rgba(10, 15, 25, 0.7);
-            --glass-hover: rgba(10, 15, 25, 0.9);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -63,7 +62,7 @@
         .hero {
             padding: 60px 5% 20px;
             display: flex; flex-direction: column; align-items: center; text-align: center;
-            min-height: 85vh; /* Full screen feel */
+            min-height: 85vh; 
             justify-content: center;
         }
 
@@ -74,8 +73,7 @@
             border: 2px solid var(--primary);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
             margin-bottom: 30px;
-            /* Placeholder: Ganti dengan foto asli Anda */
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200');
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200'); /* GANTI FOTO ANDA */
             background-size: cover; background-position: center;
         }
         
@@ -94,7 +92,6 @@
             line-height: 1.6;
         }
 
-        /* Social Hub (Rapi & Minimalis) */
         .social-hub { display: flex; gap: 12px; justify-content: center; margin-bottom: 40px; }
         .social-btn {
             width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
@@ -123,7 +120,7 @@
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform:translateX(-50%) translateY(0);} 40% {transform:translateX(-50%) translateY(-10px);} 60% {transform:translateX(-50%) translateY(-5px);} }
         @keyframes scroll { 0% {opacity:1; transform:translateY(0);} 100% {opacity:0; transform:translateY(10px);} }
 
-        /* --- 4. TAB CONTROLLER (Clean) --- */
+        /* --- 4. TAB CONTROLLER --- */
         .tab-container {
             display: flex; justify-content: center; gap: 2px; 
             padding: 5px; margin: 0 auto 40px;
@@ -144,46 +141,57 @@
         .content-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- 5. CAPABILITIES CARD (Refined) --- */
+        /* --- 5. CAPABILITIES CARD --- */
         .expert-card {
             background: var(--glass); border: 1px solid var(--border); 
             border-radius: 12px; overflow: hidden; margin-bottom: 20px;
             transition: 0.3s;
         }
-        .expert-card:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .expert-card:hover { border-color: var(--primary); transform: translateY(-3px); }
         
         .card-top { padding: 25px; }
-        
         .expert-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .expert-title { font-size: 1.15rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 12px; text-transform: uppercase; letter-spacing: 1px; }
         .expert-title i { color: var(--primary); font-size: 1.1rem; }
         .stars { color: #ffd700; font-size: 0.7rem; letter-spacing: 2px; opacity: 0.8; }
-        
         .expert-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-
-        /* Separator Line */
         .card-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-
-        /* Stack Area */
         .card-bottom { padding: 20px 25px; background: rgba(0, 0, 0, 0.2); }
         .stack-label { font-family: 'Share Tech Mono'; font-size: 0.7rem; color: var(--primary); margin-bottom: 10px; opacity: 0.7; }
-        
         .embedded-stack { display: flex; flex-wrap: wrap; gap: 8px; }
         .embedded-badge { height: 24px; transition: 0.2s; border-radius: 3px; }
         .embedded-badge:hover { transform: scale(1.05); filter: brightness(1.2); }
 
-        /* --- 6. PROJECT CARD (Refined) --- */
+        /* --- 6. PROJECT FILTER & CARDS --- */
+        /* Filter Controls */
+        .filter-container {
+            display: flex; justify-content: center; gap: 15px; margin-bottom: 30px;
+        }
+        .filter-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+            padding: 8px 16px; font-family: 'Share Tech Mono'; font-size: 0.8rem; cursor: pointer;
+            border-radius: 4px; transition: 0.3s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary); color: var(--primary); background: rgba(0, 243, 255, 0.05);
+        }
+
+        /* Project Card */
         .project-card {
             display: block; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; 
             text-decoration: none; background: var(--glass); overflow: hidden; transition: 0.4s;
         }
+        /* Class untuk Filter Logic */
+        .project-card.show { display: block; animation: zoomIn 0.4s ease; }
+        .project-card.hide { display: none; }
+        @keyframes zoomIn { from {opacity:0; transform: scale(0.9);} to {opacity:1; transform: scale(1);} }
+
         .project-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         
         .p-img-box { position: relative; width: 100%; height: 200px; overflow: hidden; border-bottom: 1px solid var(--border); }
         .p-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
         .project-card:hover .p-img { filter: grayscale(0%); transform: scale(1.05); }
         
-        /* Overlay Icon */
         .p-icon { 
             position: absolute; top: 15px; right: 15px; width: 35px; height: 35px; 
             background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); border-radius: 50%;
@@ -195,7 +203,7 @@
         .p-title { font-size: 1.2rem; font-weight: 700; color: #fff; text-transform: uppercase; margin-bottom: 5px; }
         .p-meta { font-size: 0.75rem; color: var(--primary); font-family: 'Share Tech Mono'; letter-spacing: 1px; }
 
-        /* --- 7. FOOTER SYSTEM BAR --- */
+        /* --- 7. FOOTER --- */
         footer {
             margin-top: 60px; padding: 20px; border-top: 1px solid var(--border);
             display: flex; justify-content: space-between; align-items: center;
@@ -212,18 +220,24 @@
         }
         #topBtn:hover { background: var(--primary); color: #000; }
 
-        /* --- PC LAYOUT --- */
+        /* --- LAYOUT GRID PC --- */
         @media (min-width: 768px) {
             .tab-container { min-width: 300px; }
             .content-section { width: 90%; max-width: 1000px; margin: 0 auto; }
-            #capabilities, #database { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-            #capabilities.active, #database.active { display: grid; }
-            .expert-card, .project-card { margin-bottom: 0; }
+            #capabilities { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            
+            /* Grid khusus untuk database dengan filter agar tidak rusak */
+            #database-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+            
+            #capabilities.active { display: grid; }
+            .expert-card { margin-bottom: 0; }
             .hero { min-height: 90vh; }
         }
     </style>
 </head>
 <body>
+
+    <div class="scan-line"></div>
 
     <header>
         <div class="logo">SATRIA<span style="color:var(--primary)">.DEV</span></div>
@@ -359,50 +373,70 @@
 
     <div id="database" class="content-section">
         
-        <a href="#" class="project-card">
-            <div class="p-img-box">
-                <img src="img/coffe.png" class="p-img" onerror="this.src='https://image.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
-                <div class="p-icon"><i class="fas fa-external-link-alt"></i></div>
-            </div>
-            <div class="p-info">
-                <div class="p-title">Samik Coffee</div>
-                <div class="p-meta">WEB DESIGN // F&B // HTML CSS</div>
-            </div>
-        </a>
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterSelection('all')">ALL</button>
+            <button class="filter-btn" onclick="filterSelection('web')">WEB</button>
+            <button class="filter-btn" onclick="filterSelection('ai')">AI</button>
+        </div>
 
-        <a href="#" class="project-card">
-            <div class="p-img-box">
-                <img src="img/kasir.png" class="p-img" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
-                <div class="p-icon"><i class="fas fa-external-link-alt"></i></div>
-            </div>
-            <div class="p-info">
-                <div class="p-title">POS System</div>
-                <div class="p-meta">WEB APP // MANAGEMENT // LARAVEL</div>
-            </div>
-        </a>
+        <div id="database-grid">
+            
+            <a href="https://samik-coffe.vercel.app/" target="_blank" class="project-card web">
+                <div class="p-img-box">
+                    <img src="img/coffe.png" class="p-img" onerror="this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000'">
+                    <div class="p-icon"><i class="fas fa-external-link-alt"></i></div>
+                </div>
+                <div class="p-info">
+                    <div class="p-title">Samik Coffee</div>
+                    <div class="p-meta">WEB DESIGN // F&B</div>
+                </div>
+            </a>
 
-        <a href="#" class="project-card">
-            <div class="p-img-box">
-                <img src="img/showroom.png" class="p-img" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
-                <div class="p-icon"><i class="fas fa-external-link-alt"></i></div>
-            </div>
-            <div class="p-info">
-                <div class="p-title">Auto Gallery</div>
-                <div class="p-meta">CATALOG // INTERACTIVE // JS</div>
-            </div>
-        </a>
+            <a href="https://samikstore-pos.vercel.app/" target="_blank" class="project-card web">
+                <div class="p-img-box">
+                    <img src="img/kasir.png" class="p-img" onerror="this.src='https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000'">
+                    <div class="p-icon"><i class="fas fa-external-link-alt"></i></div>
+                </div>
+                <div class="p-info">
+                    <div class="p-title">POS System</div>
+                    <div class="p-meta">WEB APP // MANAGEMENT</div>
+                </div>
+            </a>
 
-         <a href="#" class="project-card">
-            <div class="p-img-box">
-                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000" class="p-img">
-                <div class="p-icon"><i class="fas fa-robot"></i></div>
-            </div>
-            <div class="p-info">
-                <div class="p-title">AI Automation Bot</div>
-                <div class="p-meta">PYTHON // WORKFLOW // API</div>
-            </div>
-        </a>
+            <a href="https://samik-showrm.vercel.app/" target="_blank" class="project-card web">
+                <div class="p-img-box">
+                    <img src="img/showroom.png" class="p-img" onerror="this.src='https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1000'">
+                    <div class="p-icon"><i class="fas fa-external-link-alt"></i></div>
+                </div>
+                <div class="p-info">
+                    <div class="p-title">Auto Gallery</div>
+                    <div class="p-meta">CATALOG // INTERACTIVE</div>
+                </div>
+            </a>
 
+            <a href="#" class="project-card ai">
+                <div class="p-img-box">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000" class="p-img">
+                    <div class="p-icon"><i class="fas fa-robot"></i></div>
+                </div>
+                <div class="p-info">
+                    <div class="p-title">AI Automation Bot</div>
+                    <div class="p-meta">PYTHON // WORKFLOW</div>
+                </div>
+            </a>
+
+            <a href="#" class="project-card ai">
+                <div class="p-img-box">
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000" class="p-img">
+                    <div class="p-icon"><i class="fas fa-brain"></i></div>
+                </div>
+                <div class="p-info">
+                    <div class="p-title">Data Analysis</div>
+                    <div class="p-meta">PANDAS // INSIGHTS</div>
+                </div>
+            </a>
+
+        </div>
     </div>
 
     <button onclick="topFunction()" id="topBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
@@ -416,7 +450,7 @@
     <script>
         AOS.init({ once: true, duration: 600 });
 
-        // TYPEWRITER
+        // 1. TYPEWRITER
         class TypeWriter {
             constructor(txtElement, words, wait = 3000) {
                 this.txtElement = txtElement;
@@ -456,7 +490,7 @@
             new TypeWriter(txtElement, words, wait);
         });
 
-        // TAB SWITCHER
+        // 2. TAB SWITCHER
         function openTab(tabName) {
             var i;
             var x = document.getElementsByClassName("content-section");
@@ -470,15 +504,63 @@
             }
             
             var target = document.getElementById(tabName);
-            if (window.innerWidth > 768) { target.style.display = "grid"; } 
-            else { target.style.display = "block"; }
+            target.style.display = "block"; // Default block
 
             setTimeout(() => { target.classList.add("active"); }, 10);
             event.currentTarget.className += " active";
             setTimeout(() => { AOS.refresh(); }, 100);
         }
 
-        // SCROLL TO TOP
+        // 3. PROJECT FILTER
+        filterSelection("all")
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("project-card");
+            if (c == "all") c = "";
+            for (i = 0; i < x.length; i++) {
+                w3RemoveClass(x[i], "show");
+                w3RemoveClass(x[i], "hide"); // Reset
+                if (x[i].className.indexOf(c) > -1) {
+                    w3AddClass(x[i], "show");
+                } else {
+                    w3AddClass(x[i], "hide");
+                }
+            }
+            
+            // Update Active Button
+            var btnContainer = document.querySelector(".filter-container");
+            var btns = btnContainer.getElementsByClassName("filter-btn");
+            for (var j = 0; j < btns.length; j++) {
+                btns[j].addEventListener("click", function(){
+                    var current = document.getElementsByClassName("filter-btn active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+                });
+            }
+        }
+
+        function w3AddClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+            }
+        }
+
+        function w3RemoveClass(element, name) {
+            var i, arr1, arr2;
+            arr1 = element.className.split(" ");
+            arr2 = name.split(" ");
+            for (i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);     
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+
+        // 4. SCROLL TO TOP
         var mybutton = document.getElementById("topBtn");
         window.onscroll = function() {scrollFunction()};
         function scrollFunction() {
@@ -492,7 +574,7 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // CLOCK
+        // 5. CLOCK
         function updateClock() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US', { hour12: false });
